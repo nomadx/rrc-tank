@@ -9,7 +9,7 @@
 
 Engine::Engine()
 {
-	SDLApp::GetInstance();
+	SDLAPP;
 	isRunning = true;
 }
 
@@ -20,7 +20,7 @@ Engine::~Engine()
 
 bool Engine::KeepRunning()
 {
-	return SDLApp::GetInstance().KeepRunning();
+	return SDLAPP.KeepRunning();
 }
 
 void Engine::Update()
@@ -33,7 +33,21 @@ void Engine::Render()
 
 void Engine::HandleInput()
 {
-	SDLApp::GetInstance().HandleInput();
+	std::cout<<"handling input"<<std::endl;
+	SDLAPP.HandleInput();
+
+	bool up   = SDLAPP.GetKey(SDLK_UP)  || SDLAPP.GetKey(SDLK_w);
+	bool down = SDLAPP.GetKey(SDLK_DOWN)|| SDLAPP.GetKey(SDLK_s);
+
+	if (up)
+	{
+		std::cout<<"up"<<std::endl;
+	}
+	if (down)
+	{
+		std::cout<<"down"<<std::endl;
+	}
+
 }
 
 void Engine::UpdateVideo()

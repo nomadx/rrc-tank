@@ -25,13 +25,30 @@ SDLApp::~SDLApp()
 void SDLApp::HandleInput()
 {
 	SDL_Event e;
+	bool found = false;
 	while(SDL_PollEvent(&e))
 	{
 		switch(e.type)
 		{
 		case SDL_KEYDOWN:
+			found = false;
+			for(std::vector<int>::iterator it = this->keys.begin();
+				it!=this->keys.end();
+				++it)
+				if (*it==e.key.keysym.sym) { found = true; break;}
+			if (found == false)
+				keys.push_back(e.key.keysym.sym);
+			if (e.key.keysym.sym == SDLK_ESCAPE)
+			{
+				isRunning = false;
+				return;
+			}
 			break;
 		case SDL_KEYUP:
+			for(std::vector<int>::iterator it = this->keys.begin();
+				it!=this->keys.end();
+				++it)
+				if (*it==e.key.keysym.sym) { keys.erase(it); break;}
 			break;
 		case SDL_MOUSEMOTION:
 			break;
@@ -67,6 +84,10 @@ int SDLApp::GetFPS()
 
 bool SDLApp::GetKey(int key)
 {
+	for(std::vector<int>::iterator it = keys.begin();
+		it != keys.end();
+		++it)
+		if (*it==key) return true;
 	return false;
 }
 

@@ -11,6 +11,7 @@
 #include <iostream>
 #include "SDL_App.hpp"
 #include "../game/AbstractState.hpp"
+#include "../util/Util.hpp"
 
 class Engine
 {
