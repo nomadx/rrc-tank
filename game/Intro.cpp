@@ -7,6 +7,7 @@
 
 #include "Intro.hpp"
 #include "../util/Util.hpp"
+#include "../system/Engine.hpp"
 
 Intro::Intro()
 {
@@ -27,6 +28,12 @@ void Intro::Resume()
 
 void Intro::Update()
 {
+	bool spaceButton = SDLAPP.GetKey(SDLK_SPACE);
+	if (spaceButton)
+	{
+		Engine *engine = Engine::Instance();
+		engine->ChangesState("game");
+	}
 }
 void Intro::Render()
 {

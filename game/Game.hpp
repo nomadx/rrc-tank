@@ -9,6 +9,7 @@
 #define GAME_HPP_
 
 #include "AbstractState.hpp"
+#include "../system/Engine.hpp"
 
 class Game : public AbstractState
 {
@@ -24,6 +25,7 @@ public:
 
 protected:
 private:
+	SDL_Surface* background;
 };
 
 

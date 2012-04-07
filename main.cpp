@@ -8,10 +8,10 @@
 #include "util/Util.hpp"
 #include "system/Engine.hpp"
 #include "game/Intro.hpp"
-/*#include "game/Menu.hpp"
 #include "game/Game.hpp"
-#include "game/End.hpp"
-*/
+//#include "game/Menu.hpp"
+//#include "game/End.hpp"
+
 
 int main(int argc, char **argv)
 {
@@ -19,6 +19,7 @@ int main(int argc, char **argv)
 	//engine->SetTitle("RRC framework");
 
 	engine->AddGameState("intro", new Intro());
+	engine->AddGameState("game" , new Game());
 /*	game->AddGameState(new Intro());
 	game->AddGameState(new Menu());
 	game->AddGameState(new Game());
