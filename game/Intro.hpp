@@ -9,6 +9,7 @@
 #define INTRO_HPP_
 
 #include "AbstractState.hpp"
+#include "../system/Engine.hpp"
 
 class Intro : public AbstractState
 {
@@ -19,13 +20,12 @@ public:
 	void Pause();
 	void Resume();
 
-	void HandleInput();
 	void Update();
 	void Render();
 
 protected:
-
 private:
+	Engine* engine;
 };
 
 #endif /* INTRO_HPP_ */

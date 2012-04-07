@@ -9,6 +9,8 @@
 #define ENGINE_HPP_
 
 #include <iostream>
+#include <map>
+#include <string>
 #include "SDL_App.hpp"
 #include "LogManager.hpp"
 #include "../game/AbstractState.hpp"
@@ -27,13 +29,16 @@ public:
 	void HandleInput();
 	void UpdateVideo();
 
-	void AddGameState(AbstractState* state);
+	void AddGameState(const std::string& name, AbstractState* state);
+	void ChangesState(const std::string& name);
 
 	void Exit();
 
 protected:
 private:
 	bool isRunning;
+	AbstractState* currentState;
+	std::map<std::string, AbstractState*> states;
 };
 
 #endif /* ENGINE_HPP_ */

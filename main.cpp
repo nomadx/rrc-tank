@@ -5,6 +5,7 @@
  *      Author: Sharavsambuu
  */
 #include <iostream>
+#include "util/Util.hpp"
 #include "system/Engine.hpp"
 #include "game/Intro.hpp"
 /*#include "game/Menu.hpp"
@@ -14,29 +15,29 @@
 
 int main(int argc, char **argv)
 {
-
-	Engine *game = new Engine();
+	Engine *engine = new Engine();
+	//engine->SetTitle("RRC framework");
 
 	Intro *intro = new Intro();
-	game->AddGameState(intro);
+	engine->AddGameState("intro", intro);
 /*	game->AddGameState(new Intro());
 	game->AddGameState(new Menu());
 	game->AddGameState(new Game());
 	game->AddGameState(new End());
 */
+	engine->ChangesState("intro");
 
-	while(game->KeepRunning())
+	while(engine->KeepRunning())
 	{
-		game->Update();
-		game->Render();
-		game->HandleInput();
-		game->UpdateVideo();
-		std::cout<<"test.."<<std::endl;
+		engine->Update();
+		engine->Render();
+		engine->HandleInput();
+		engine->UpdateVideo();
 	}
 
 	delete intro;
-	delete game;
-	intro = 0;
-	game  = 0;
+	delete engine;
+	intro  = 0;
+	engine = 0;
 	return 0;
 }

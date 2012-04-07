@@ -22,9 +22,6 @@ void Intro::Resume()
 {
 }
 
-void Intro::HandleInput()
-{
-}
 void Intro::Update()
 {
 }

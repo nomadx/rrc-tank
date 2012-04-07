@@ -27,29 +27,18 @@ bool Engine::KeepRunning()
 
 void Engine::Update()
 {
+	currentState->Update();
 }
 
 void Engine::Render()
 {
+	currentState->Render();
 }
 
 void Engine::HandleInput()
 {
 	std::cout<<"handling input"<<std::endl;
 	SDLAPP.HandleInput();
-
-	bool up   = SDLAPP.GetKey(SDLK_UP)  || SDLAPP.GetKey(SDLK_w);
-	bool down = SDLAPP.GetKey(SDLK_DOWN)|| SDLAPP.GetKey(SDLK_s);
-
-	if (up)
-	{
-		std::cout<<"up"<<std::endl;
-	}
-	if (down)
-	{
-		std::cout<<"down"<<std::endl;
-	}
-
 }
 
 void Engine::UpdateVideo()
@@ -57,8 +46,25 @@ void Engine::UpdateVideo()
 
 }
 
-void Engine::AddGameState(AbstractState* state)
+void Engine::AddGameState(const std::string& name, AbstractState* state)
 {
+	std::map<std::string,AbstractState*>::iterator it = states.find(name);
+	if (it==states.end())
+	{
+		states[name] = state;
+	}
+}
+
+void Engine::ChangesState(const std::string& name)
+{
+	std::map<std::string,AbstractState*>::iterator it = states.find(name);
+	if (it!=states.end())
+	{
+		if (currentState)
+			currentState->Pause();
+		currentState = states[name];
+		currentState->Resume();
+	}
 }
 
 void Engine::Exit()
