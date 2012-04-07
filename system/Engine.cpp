@@ -18,6 +18,13 @@ Engine::Engine()
 
 Engine::~Engine()
 {
+	for(std::map<std::string, AbstractState*>::iterator it = states.begin();
+		it != states.end();
+		++it)
+	{
+		delete (*it).second;
+	}
+	states.clear();
 	SDLApp    ::KillInstance();
 	LogManager::KillInstance();
 }
@@ -45,12 +52,12 @@ void Engine::HandleInput()
 
 void Engine::UpdateVideo()
 {
-
+	SDLAPP.UpdateVideo();
 }
 
 void Engine::AddGameState(const std::string& name, AbstractState* state)
 {
-	std::map<std::string,AbstractState*>::iterator it = states.find(name);
+	std::map<std::string, AbstractState*>::iterator it = states.find(name);
 	if (it==states.end())
 	{
 		states[name] = state;
@@ -59,7 +66,7 @@ void Engine::AddGameState(const std::string& name, AbstractState* state)
 
 void Engine::ChangesState(const std::string& name)
 {
-	std::map<std::string,AbstractState*>::iterator it = states.find(name);
+	std::map<std::string, AbstractState*>::iterator it = states.find(name);
 	if (it!=states.end())
 	{
 		if (currentState)

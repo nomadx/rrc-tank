@@ -18,8 +18,7 @@ int main(int argc, char **argv)
 	Engine *engine = Engine::Instance();
 	//engine->SetTitle("RRC framework");
 
-	Intro *intro = new Intro();
-	engine->AddGameState("intro", intro);
+	engine->AddGameState("intro", new Intro());
 /*	game->AddGameState(new Intro());
 	game->AddGameState(new Menu());
 	game->AddGameState(new Game());
@@ -34,9 +33,6 @@ int main(int argc, char **argv)
 		engine->HandleInput();
 		engine->UpdateVideo();
 	}
-
-	delete intro;
-	intro  = 0;
 
 	return 0;
 }

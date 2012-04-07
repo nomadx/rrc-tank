@@ -23,6 +23,11 @@ SDLApp::~SDLApp()
 	SDL_Quit();
 }
 
+SDL_Surface* SDLApp::GetSurface()
+{
+	return screen;
+}
+
 void SDLApp::HandleInput()
 {
 	std::cout<<"working..."<<std::endl;
@@ -63,6 +68,7 @@ void SDLApp::HandleInput()
 
 void SDLApp::UpdateVideo()
 {
+	SDL_Flip(screen);
 }
 
 bool SDLApp::KeepRunning()

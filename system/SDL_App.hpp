@@ -18,6 +18,8 @@ public:
 	SDLApp();
 	~SDLApp();
 
+	SDL_Surface* GetSurface();
+
 	void HandleInput();
 	void UpdateVideo();
 	bool KeepRunning();

@@ -25,7 +25,7 @@ public:
 
 protected:
 private:
-	Engine* engine;
+	SDL_Surface* background;
 };
 
 #endif /* INTRO_HPP_ */
