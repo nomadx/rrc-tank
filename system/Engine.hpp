@@ -9,6 +9,7 @@
 #define ENGINE_HPP_
 
 #include <iostream>
+#include "SDL_App.hpp"
 #include "../game/AbstractState.hpp"
 
 class Engine

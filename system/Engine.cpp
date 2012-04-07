@@ -9,16 +9,18 @@
 
 Engine::Engine()
 {
+	SDLApp::GetInstance();
 	isRunning = true;
 }
 
 Engine::~Engine()
 {
+	SDLApp::KillInstance();
 }
 
-bool Engine::keepRunning()
+bool Engine::KeepRunning()
 {
-	return isRunning;
+	return SDLApp::GetInstance().KeepRunning();
 }
 
 void Engine::Update()
@@ -31,6 +33,7 @@ void Engine::Render()
 
 void Engine::HandleInput()
 {
+	SDLApp::GetInstance().HandleInput();
 }
 
 void Engine::UpdateVideo()

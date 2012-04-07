@@ -41,6 +41,10 @@ private:
 	std::vector<int> keys;
 	int  mouseWheel;
 	bool mouseCentered;
+
+	int wnd_width;
+	int wnd_height;
+	SDL_Surface* screen;
 };
 
 #endif /* SDL_APP_HPP_ */
