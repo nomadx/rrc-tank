@@ -34,8 +34,14 @@ public:
 
 	void Exit();
 
+	static Engine* Instance() {
+		return &engineInstance;
+	}
+
 protected:
 private:
+	static Engine engineInstance;
+
 	bool isRunning;
 	AbstractState* currentState;
 	std::map<std::string, AbstractState*> states;

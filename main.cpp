@@ -15,7 +15,7 @@
 
 int main(int argc, char **argv)
 {
-	Engine *engine = new Engine();
+	Engine *engine = Engine::Instance();
 	//engine->SetTitle("RRC framework");
 
 	Intro *intro = new Intro();
@@ -36,8 +36,7 @@ int main(int argc, char **argv)
 	}
 
 	delete intro;
-	delete engine;
 	intro  = 0;
-	engine = 0;
+
 	return 0;
 }

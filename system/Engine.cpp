@@ -7,6 +7,8 @@
 
 #include "Engine.hpp"
 
+Engine Engine::engineInstance;
+
 Engine::Engine()
 {
 	SDLAPP;
