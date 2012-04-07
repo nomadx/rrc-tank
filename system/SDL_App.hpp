@@ -19,7 +19,7 @@ public:
 
 	void HandleInput();
 	void UpdateVideo();
-	void keepRunning();
+	bool KeepRunning();
 
 	void  SetStartTime();
 	float GetDeltaTime();
@@ -30,7 +30,7 @@ public:
 
 protected:
 private:
-	bool running;
+	bool  isRunning;
 	float startTime;
 	float deltaTime;
 	int   framesPerSec;
@@ -38,7 +38,7 @@ private:
 	Uint32 timer;
 
 	std::vector<int> keys;
-	int mouseWheel;
+	int  mouseWheel;
 	bool mouseCentered;
 };
 

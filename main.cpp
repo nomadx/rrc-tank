@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 	game->AddGameState(new End());
 */
 
-	while(game->keepRunning())
+	while(game->KeepRunning())
 	{
 		game->Update();
 		game->Render();

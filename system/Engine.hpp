@@ -17,7 +17,7 @@ public:
 	Engine();
 	~Engine();
 
-	bool keepRunning();
+	bool KeepRunning();
 
 	void Update();
 	void Render();
