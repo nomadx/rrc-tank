@@ -10,6 +10,7 @@
 #include "../util/Singleton.hpp"
 #include <vector>
 #include "SDL/SDL.h"
+
 class SDLApp : public Singleton<SDLApp>
 {
 	friend class Singleton<SDLApp>;
