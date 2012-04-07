@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include "SDL_App.hpp"
+#include "LogManager.hpp"
 #include "../game/AbstractState.hpp"
 #include "../util/Util.hpp"
 
@@ -26,7 +27,7 @@ public:
 	void HandleInput();
 	void UpdateVideo();
 
-	void AddGameState(AbstractState& state);
+	void AddGameState(AbstractState* state);
 
 	void Exit();
 

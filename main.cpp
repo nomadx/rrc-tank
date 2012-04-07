@@ -4,20 +4,22 @@
  *  Created on: Apr 3, 2012
  *      Author: Sharavsambuu
  */
-
+#include <iostream>
 #include "system/Engine.hpp"
 #include "game/Intro.hpp"
-#include "game/Menu.hpp"
+/*#include "game/Menu.hpp"
 #include "game/Game.hpp"
 #include "game/End.hpp"
+*/
 
 int main(int argc, char **argv)
 {
+
 	Engine *game = new Engine();
 
-/*	Intro intro;
-	game->AddGameState(&intro);
-	game->AddGameState(new Intro());
+	Intro *intro = new Intro();
+	game->AddGameState(intro);
+/*	game->AddGameState(new Intro());
 	game->AddGameState(new Menu());
 	game->AddGameState(new Game());
 	game->AddGameState(new End());
@@ -29,8 +31,12 @@ int main(int argc, char **argv)
 		game->Render();
 		game->HandleInput();
 		game->UpdateVideo();
+		std::cout<<"test.."<<std::endl;
 	}
+
+	delete intro;
 	delete game;
-	game = 0;
+	intro = 0;
+	game  = 0;
 	return 0;
 }

@@ -14,7 +14,18 @@ class Intro : public AbstractState
 {
 public:
 	Intro();
-	virtual ~Intro();
+	~Intro();
+
+	void Pause();
+	void Resume();
+
+	void HandleInput();
+	void Update();
+	void Render();
+
+protected:
+
+private:
 };
 
 #endif /* INTRO_HPP_ */

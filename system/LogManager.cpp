@@ -5,3 +5,12 @@
  *      Author: sharavsambuu
  */
 
+#include "LogManager.hpp"
+
+LogManager::LogManager()
+{
+}
+
+LogManager::~LogManager()
+{
+}

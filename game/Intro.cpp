@@ -14,3 +14,20 @@ Intro::Intro()
 Intro::~Intro()
 {
 }
+
+void Intro::Pause()
+{
+}
+void Intro::Resume()
+{
+}
+
+void Intro::HandleInput()
+{
+}
+void Intro::Update()
+{
+}
+void Intro::Render()
+{
+}

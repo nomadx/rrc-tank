@@ -10,12 +10,14 @@
 Engine::Engine()
 {
 	SDLAPP;
+	LOG   ;
 	isRunning = true;
 }
 
 Engine::~Engine()
 {
-	SDLApp::KillInstance();
+	SDLApp    ::KillInstance();
+	LogManager::KillInstance();
 }
 
 bool Engine::KeepRunning()
@@ -53,6 +55,10 @@ void Engine::HandleInput()
 void Engine::UpdateVideo()
 {
 
+}
+
+void Engine::AddGameState(AbstractState* state)
+{
 }
 
 void Engine::Exit()

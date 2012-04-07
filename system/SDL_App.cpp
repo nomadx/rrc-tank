@@ -6,6 +6,7 @@
  */
 
 #include "SDL_App.hpp"
+#include <iostream>
 
 SDLApp::SDLApp()
 {
@@ -24,6 +25,7 @@ SDLApp::~SDLApp()
 
 void SDLApp::HandleInput()
 {
+	std::cout<<"working..."<<std::endl;
 	SDL_Event e;
 	bool found = false;
 	while(SDL_PollEvent(&e))
