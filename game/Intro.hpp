@@ -27,6 +27,9 @@ protected:
 private:
 	SDL_Surface* background;
 
+	SDL_Surface* fader;
+	int alpha;
+
 	bool isEntered;
 	float enteredTime;
 };

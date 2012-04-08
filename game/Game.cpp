@@ -6,10 +6,11 @@
  */
 
 #include "Game.hpp"
+#include "../util/ImageLoader.hpp"
 
 Game::Game()
 {
-	background = SDL_LoadBMP("data/gamestate.bmp");
+	background = load_image("data/background.png");
 	isEntered = true;
 }
 
@@ -49,5 +50,6 @@ void Game::Update()
 }
 void Game::Render()
 {
-	SDL_BlitSurface(background, NULL, SDLAPP.GetSurface(), NULL);
+	SDL_FillRect(SDLAPP.GetSurface(), NULL , 0x221122);
+//	SDL_BlitSurface(background, NULL, SDLAPP.GetSurface(), NULL);
 }
