@@ -17,7 +17,7 @@ SDLApp::SDLApp()
 
 	SDL_WM_SetCaption("RRC framework", NULL);
 
-	isRunning = true;
+	isRunning     = true;
 	framesPerSec  = 0;
 	frameCnt      = 0;
 	timer         = SDL_GetTicks()+1000;
@@ -76,7 +76,7 @@ void SDLApp::HandleInput()
 void SDLApp::UpdateVideo()
 {
 	SDL_Flip(screen);
-	// fps
+
 	++frameCnt;
 	Uint32 now = SDL_GetTicks();
 	if (now>timer)
@@ -84,11 +84,10 @@ void SDLApp::UpdateVideo()
 		timer = now + 1000;
 		framesPerSec = frameCnt;
 		frameCnt = 0;
-		char str[30];
+		/*char str[30];
 		sprintf(str,"%s fps:%d", "RRC framework", framesPerSec);
-		SDL_WM_SetCaption(str, NULL);
+		SDL_WM_SetCaption(str, NULL);*/
 	}
-	// deltaTime
 	float  lastTime  = float(now)/1000.0f;
 	deltaTime = lastTime - startTime;
 	startTime = lastTime;

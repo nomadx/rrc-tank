@@ -10,6 +10,7 @@
 Game::Game()
 {
 	background = SDL_LoadBMP("data/gamestate.bmp");
+	isEntered = true;
 }
 
 Game::~Game()
@@ -19,15 +20,28 @@ Game::~Game()
 
 void Game::Pause()
 {
+	isEntered = false;
 }
 void Game::Resume()
 {
+	isEntered   = true;
+	enteredTime = 0.0f;
 }
 
 void Game::Update()
 {
+	if (isEntered)
+	{
+		enteredTime += SDLAPP.GetDeltaTime();
+		if (enteredTime>0.5f)
+		{
+			isEntered   = false;
+			enteredTime = 0.0;
+		}
+	}
+
 	bool spaceButton = SDLAPP.GetKey(SDLK_SPACE);
-	if (spaceButton)
+	if (spaceButton&&!isEntered)
 	{
 		Engine *engine = Engine::Instance();
 		engine->ChangesState("intro");

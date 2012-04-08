@@ -26,6 +26,9 @@ public:
 protected:
 private:
 	SDL_Surface* background;
+
+	bool isEntered;
+	float enteredTime;
 };
 
 #endif /* INTRO_HPP_ */

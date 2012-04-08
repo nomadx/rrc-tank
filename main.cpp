@@ -9,22 +9,14 @@
 #include "system/Engine.hpp"
 #include "game/Intro.hpp"
 #include "game/Game.hpp"
-//#include "game/Menu.hpp"
-//#include "game/End.hpp"
-
 
 int main(int argc, char **argv)
 {
 	Engine *engine = Engine::Instance();
-	//engine->SetTitle("RRC framework");
 
 	engine->AddGameState("intro", new Intro());
 	engine->AddGameState("game" , new Game());
-/*	game->AddGameState(new Intro());
-	game->AddGameState(new Menu());
-	game->AddGameState(new Game());
-	game->AddGameState(new End());
-*/
+
 	engine->ChangesState("intro");
 
 	while(engine->KeepRunning())
