@@ -10,6 +10,8 @@
 
 #include "AbstractState.hpp"
 #include "../system/Engine.hpp"
+#include "../entities/IEntity.hpp"
+#include "../entities/TestEntity.hpp"
 
 class Game : public AbstractState
 {
@@ -26,9 +28,11 @@ public:
 protected:
 private:
 	SDL_Surface* background;
-
 	bool isEntered;
 	float enteredTime;
+
+	std::vector<IEntity*> entities;
+	TestEntity* tank;
 };
 
 

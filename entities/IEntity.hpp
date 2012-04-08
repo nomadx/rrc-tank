@@ -8,11 +8,13 @@
 #ifndef IENTITY_HPP_
 #define IENTITY_HPP_
 
+#include "../game/AbstractState.hpp"
+
 class IEntity
 {
 public :
-	IEntity();
-	virtual ~IEntity();
+	//IEntity();
+	//virtual ~IEntity();
 
 	virtual void Update() = 0;
 	virtual void Render() = 0;

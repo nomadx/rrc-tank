@@ -10,6 +10,7 @@
 
 SDLApp::SDLApp()
 {
+	putenv(strdup("SDL_VIDEO_CENTERED=1"));
 	wnd_width  = 800;
 	wnd_height = 600;
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -84,9 +85,9 @@ void SDLApp::UpdateVideo()
 		timer = now + 1000;
 		framesPerSec = frameCnt;
 		frameCnt = 0;
-		/*char str[30];
+		char str[30];
 		sprintf(str,"%s fps:%d", "RRC framework", framesPerSec);
-		SDL_WM_SetCaption(str, NULL);*/
+		SDL_WM_SetCaption(str, NULL);
 	}
 	float  lastTime  = float(now)/1000.0f;
 	deltaTime = lastTime - startTime;
