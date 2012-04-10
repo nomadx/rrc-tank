@@ -29,7 +29,7 @@ void Intro::Resume()
 	enteredTime = 0.0f;
 
 	char str[30];
-	sprintf(str," entered Intro state.");
+	sprintf(str, "entered Intro state.");
 	glfwSetWindowTitle(str);
 }
 

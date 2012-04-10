@@ -37,7 +37,7 @@ void Game::Resume()
 	enteredTime = 0.0f;
 
 	char str[30];
-	sprintf(str," entered Game state.");
+	sprintf(str, "entered Game state.");
 	glfwSetWindowTitle(str);
 }
 

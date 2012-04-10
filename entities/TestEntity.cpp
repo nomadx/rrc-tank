@@ -8,6 +8,7 @@
 #include "TestEntity.hpp"
 #include "../system/GLFW_App.hpp"
 #include "../util/Util.hpp"
+#include "GL/glfw.h"
 
 TestEntity::TestEntity(AbstractState* pState)
 {
@@ -27,22 +28,28 @@ TestEntity::~TestEntity()
 
 void TestEntity::Update()
 {
+	char str[30];
 	if (up)
 	{
 		locationY -= speed * APP.GetDeltaTime();
+		sprintf(str, "UP");
 	}
 	if (down)
 	{
 		locationY += speed * APP.GetDeltaTime();
+		sprintf(str, "DOWN");
 	}
 	if (left)
 	{
 		locationX -= speed * APP.GetDeltaTime();
+		sprintf(str, "LEFT");
 	}
 	if (right)
 	{
 		locationX += speed * APP.GetDeltaTime();
+		sprintf(str, "RIGHT");
 	}
+	glfwSetWindowTitle(str);
 }
 void TestEntity::Render()
 {
