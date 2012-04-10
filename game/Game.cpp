@@ -6,6 +6,7 @@
  */
 
 #include "Game.hpp"
+#include "stdio.h"
 
 Game::Game()
 {
@@ -34,6 +35,10 @@ void Game::Resume()
 {
 	isEntered   = true;
 	enteredTime = 0.0f;
+
+	char str[30];
+	sprintf(str," entered Game state.");
+	glfwSetWindowTitle(str);
 }
 
 void Game::Update()

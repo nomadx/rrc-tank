@@ -49,9 +49,9 @@ void GLFWApp::UpdateVideo()
 		buffTime = 0.0f;
 		framesPerSec = frameCnt;
 		frameCnt = 0;
-		char str[30];
+		/*char str[30];
 		sprintf(str,"%s fps:%d", "RRC framework", framesPerSec);
-		glfwSetWindowTitle(str);
+		glfwSetWindowTitle(str);*/
 	}
 	double lastTime = glfwGetTime();
 	deltaTime = lastTime - startTime;

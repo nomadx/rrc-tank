@@ -8,6 +8,7 @@
 #include "Intro.hpp"
 #include "../util/Util.hpp"
 #include "../system/Engine.hpp"
+#include "stdio.h"
 
 Intro::Intro()
 {
@@ -26,6 +27,10 @@ void Intro::Resume()
 {
 	isEntered   = true;
 	enteredTime = 0.0f;
+
+	char str[30];
+	sprintf(str," entered Intro state.");
+	glfwSetWindowTitle(str);
 }
 
 void Intro::Update()
