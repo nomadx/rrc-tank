@@ -17,8 +17,8 @@ GLFWApp::GLFWApp()
 	wnd_height = 600;
 	int redBits   = 8, greenBits = 8,  blueBits    = 8;
 	int alphaBits = 8, depthBits = 24, stencilBits = 8;
-	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 4);
-	//glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 1);
+	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 4); // OpenGL 4.2
+	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 2);
 	if (!glfwOpenWindow(wnd_width,wnd_height,redBits,greenBits,blueBits,alphaBits,depthBits,stencilBits,GLFW_WINDOW))
 	{
 		glfwTerminate();
@@ -44,10 +44,6 @@ GLFWApp::GLFWApp()
 		fprintf(stdout, "OpenGL 4.0 is supported\n");
 	}
 	if (GLEW_VERSION_4_1)
-	{
-		fprintf(stdout, "OpenGL 4.0 is supported\n");
-	}
-	if (GLEW_VERSION_4_2)
 	{
 		fprintf(stdout, "OpenGL 4.0 is supported\n");
 	}
@@ -79,9 +75,9 @@ void GLFWApp::UpdateVideo()
 		buffTime = 0.0f;
 		framesPerSec = frameCnt;
 		frameCnt = 0;
-		/*char str[30];
+		char str[30];
 		sprintf(str,"%s fps:%d", "RRC framework", framesPerSec);
-		glfwSetWindowTitle(str);*/
+		glfwSetWindowTitle(str);
 	}
 	double lastTime = glfwGetTime();
 	deltaTime = lastTime - startTime;
