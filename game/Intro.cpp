@@ -47,7 +47,10 @@ void Intro::Update() {
 
 }
 void Intro::Render() {
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(0.0f, 0.5f, 1.0f, 0.0f);
+	glClearDepth(1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	shaderManager["Simple"]->Activate();
 	glBindVertexArray(vaoID);
 	glDrawArrays(GL_TRIANGLES, 0, 3);

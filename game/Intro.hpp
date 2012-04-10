@@ -33,7 +33,7 @@ private:
 
 	ShaderManager shaderManager;
 
-	// render-лэх өгөгдлүүд
+	// render-лэх өгөгдлүүдэд хэрэглэх буфер
 	GLuint vaoID;
 	GLuint vertexbuffer;
 };

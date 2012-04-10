@@ -6,12 +6,12 @@
  */
 
 #include "IEntity.hpp"
-/*
-IEntity::IEntity(AbstractState* state)
+
+IEntity::IEntity()
 {
 }
 
 IEntity::~IEntity()
 {
 }
-*/
+

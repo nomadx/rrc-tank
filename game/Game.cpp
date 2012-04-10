@@ -73,6 +73,9 @@ void Game::Update()
 }
 void Game::Render()
 {
+	glClearColor(0.0f, 0.5f, 1.0f, 0.0f);
+	glClearDepth(1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	for (unsigned int i=0; i<entities.size(); i++)
 	{

@@ -1,6 +1,6 @@
 
 ![image](http://dl.dropbox.com/u/3482121/picture/RRC/RRC-framework/states.png "image")
-
+![image](http://dl.dropbox.com/u/3482121/picture/RRC/RRC-framework/shader-running.png "image")
 
 Энгийн 2D танк бичих замаар 
 OpenGL бичихэд хэрэглэх фрэймворк үүсгэх зорилготой
