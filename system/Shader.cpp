@@ -7,6 +7,7 @@
 
 #include "Shader.hpp"
 #include <fstream>
+#include "stdlib.h"
 
 void printInfo(const GLuint &obj)
 {
@@ -31,5 +32,63 @@ void printInfo(const GLuint &obj)
 	}
 }
 
+Shader::Shader(std::string name, SHADERTYPE type)
+{
+	this->name = name;
+	shaderType = type;
+	isCompiled = false;
+	switch(type)
+	{
+	case VERTEX     : { shaderID = glCreateShader(GL_VERTEX_SHADER  ); break; }
+	case FRAGMENT   : { shaderID = glCreateShader(GL_FRAGMENT_SHADER); break; }
+	case GEOMETRY   : { shaderID = glCreateShader(GL_GEOMETRY_SHADER); break;}
+	case TESS_EVAL  : { shaderID = glCreateShader(GL_TESS_EVALUATION_SHADER); break;}
+	case TESS_CNTRL : { shaderID = glCreateShader(GL_TESS_CONTROL_SHADER); break;}
+	}
+	source = 0;
+}
+Shader::~Shader()
+{
+	std::cerr<<"deleting shader "<<name<<"\n";
+	delete source;
+	glDeleteShader(shaderID);
+}
 
+void Shader::Compile()
+{
+	if (source==0)
+	{
+		std::cerr<<"Warning no shader source loaded\n";
+		return;
+	}
+	glCompileShader(shaderID);
+	printInfo(shaderID);
+	isCompiled = true;
+}
+
+void Shader::Load(std::string name)
+{
+	if(source!=0)
+	{
+		delete source;
+	}
+	std::ifstream shaderSource(name.c_str());
+	if (!shaderSource.is_open())
+	{
+		std::cerr<<"file not found "<<name.c_str()<<"\n";
+		exit(EXIT_FAILURE);
+	}
+	source = new std::string(
+			std::istreambuf_iterator<char>(shaderSource),
+			std::istreambuf_iterator<char>()
+			);
+	shaderSource.close();
+	*source += "\0";
+
+	const char* data = source->c_str();
+	glShaderSource(shaderID, 1, &data, NULL);
+	isCompiled = false;
+	std::cerr<<"Shader loaded and source attached\n";
+	printInfo(shaderID);
+}
 

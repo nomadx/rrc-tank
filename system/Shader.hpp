@@ -12,7 +12,7 @@
 #include "GL/glew.h"
 
 
-enum SHADERTYPE{VERTEX, FRAGMENT, GEOMETRY, TESSELATION};
+enum SHADERTYPE{VERTEX, FRAGMENT, GEOMETRY, TESS_EVAL, TESS_CNTRL};
 
 class Shader
 {
@@ -23,7 +23,7 @@ public:
 	void Compile();
 	void Load(std::string name);
 
-	inline GLuint getShader() const { return shaderID; }
+	inline GLuint GetShader() const { return shaderID; }
 
 private:
 	std::string name;
