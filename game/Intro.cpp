@@ -8,10 +8,10 @@
 #include "Intro.hpp"
 #include "../util/Util.hpp"
 #include "../system/Engine.hpp"
-#include "../util/ImageLoader.hpp"
 
 Intro::Intro()
 {
+/*
 	SDL_Surface* temp = load_image("data/intro.png");
 	background = SDL_DisplayFormat(temp);
 	SDL_FreeSurface(temp);
@@ -23,14 +23,14 @@ Intro::Intro()
 	SDL_FillRect (fader, NULL, SDL_MapRGB (background->format, 0, 0, 0)) ;
 	alpha = 255;
 	SDL_SetAlpha(fader, SDL_SRCALPHA, alpha);
-
+*/
 	isEntered = true;
 }
 
 Intro::~Intro()
 {
-	SDL_FreeSurface(background);
-	SDL_FreeSurface(fader);
+	//SDL_FreeSurface(background);
+	//SDL_FreeSurface(fader);
 }
 
 void Intro::Pause()
@@ -41,35 +41,36 @@ void Intro::Resume()
 {
 	isEntered   = true;
 	enteredTime = 0.0f;
+	//alpha = 255;
 }
 
 void Intro::Update()
 {
 	if (isEntered)
 	{
-		enteredTime += SDLAPP.GetDeltaTime();
+		enteredTime += APP.GetDeltaTime();
 		if (enteredTime>0.5f)
 		{
 			isEntered   = false;
 			enteredTime = 0.0;
 		}
 	}
-	bool spaceButton = SDLAPP.GetKey(SDLK_SPACE);
+	bool spaceButton = APP.GetKey(GLFW_KEY_SPACE);
 	if (spaceButton&&!isEntered)
 	{
 		Engine *engine = Engine::Instance();
 		engine->ChangesState("game");
 	}
 
-	alpha--;
+	/*alpha--;
 	if (alpha < 0)
 		alpha = 0;
-	SDL_SetAlpha(fader, SDL_SRCALPHA, alpha);
+	SDL_SetAlpha(fader, SDL_SRCALPHA, alpha);*/
 }
 void Intro::Render()
 {
-	SDL_BlitSurface(background, NULL, SDLAPP.GetSurface(), NULL);
+	/*SDL_BlitSurface(background, NULL, SDLAPP.GetSurface(), NULL);
 	if (alpha!=0)
 		SDL_BlitSurface(fader, NULL, SDLAPP.GetSurface(), NULL);
-	SDL_UpdateRect(SDLAPP.GetSurface(), 0, 0, 0, 0);
+	SDL_UpdateRect(SDLAPP.GetSurface(), 0, 0, 0, 0);*/
 }

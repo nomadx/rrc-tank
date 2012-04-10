@@ -11,8 +11,8 @@ Engine Engine::engineInstance;
 
 Engine::Engine()
 {
-	SDLAPP;
-	LOG   ;
+	APP;
+	LOG;
 	isRunning = true;
 }
 
@@ -25,13 +25,13 @@ Engine::~Engine()
 		delete (*it).second;
 	}
 	states.clear();
-	SDLApp    ::KillInstance();
+	GLFWApp   ::KillInstance();
 	LogManager::KillInstance();
 }
 
 bool Engine::KeepRunning()
 {
-	return SDLAPP.KeepRunning();
+	return APP.KeepRunning();
 }
 
 void Engine::Update()
@@ -46,13 +46,12 @@ void Engine::Render()
 
 void Engine::HandleInput()
 {
-	std::cout<<"handling input"<<std::endl;
-	SDLAPP.HandleInput();
+	APP.HandleInput();
 }
 
 void Engine::UpdateVideo()
 {
-	SDLAPP.UpdateVideo();
+	APP.UpdateVideo();
 }
 
 void Engine::AddGameState(const std::string& name, AbstractState* state)

@@ -10,7 +10,7 @@
 #include "game/Intro.hpp"
 #include "game/Game.hpp"
 
-int main(int argc, char **argv)
+int main(void)
 {
 	Engine *engine = Engine::Instance();
 

@@ -17,7 +17,8 @@
 #define SAFE_DELETE(p) if (p) { delete p; p = NULL; }
 
 #define ENGINE Engine    ::GetInstance()
-#define SDLAPP SDLApp    ::GetInstance()
+//#define SDLAPP SDLApp    ::GetInstance()
+#define APP    GLFWApp   ::GetInstance()
 #define LOG    LogManager::GetInstance()
 
 #endif /* UTIL_HPP_ */

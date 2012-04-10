@@ -27,7 +27,6 @@ public:
 
 protected:
 private:
-	SDL_Surface* background;
 	bool isEntered;
 	float enteredTime;
 

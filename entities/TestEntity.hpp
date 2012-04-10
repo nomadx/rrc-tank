@@ -10,8 +10,6 @@
 
 #include "IEntity.hpp"
 #include "../game/AbstractState.hpp"
-#include "SDL/SDL.h"
-#include "../util/ImageLoader.hpp"
 
 class TestEntity : public IEntity
 {
@@ -31,7 +29,7 @@ protected:
 private:
 	AbstractState* state;
 
-	SDL_Surface* sprite;
+	//SDL_Surface* sprite;
 	float locationX;
 	float locationY;
 	float speed;

@@ -6,13 +6,13 @@
  */
 
 #include "TestEntity.hpp"
-#include "../system/SDL_App.hpp"
+#include "../system/GLFW_App.hpp"
 #include "../util/Util.hpp"
 
 TestEntity::TestEntity(AbstractState* pState)
 {
 	state  = pState;
-	sprite = load_image("data/tank/mockup_tank1.png");
+	//sprite = load_image("data/tank/mockup_tank1.png");
 	locationX = 0.0f;
 	locationY = 0.0f;
 	speed = 50.0f;
@@ -24,34 +24,34 @@ TestEntity::TestEntity(AbstractState* pState)
 
 TestEntity::~TestEntity()
 {
-	SDL_FreeSurface(sprite);
+	//SDL_FreeSurface(sprite);
 }
 
 void TestEntity::Update()
 {
 	if (up)
 	{
-		locationY -= speed * SDLAPP.GetDeltaTime();
+		locationY -= speed * APP.GetDeltaTime();
 	}
 	if (down)
 	{
-		locationY += speed * SDLAPP.GetDeltaTime();
+		locationY += speed * APP.GetDeltaTime();
 	}
 	if (left)
 	{
-		locationX -= speed * SDLAPP.GetDeltaTime();
+		locationX -= speed * APP.GetDeltaTime();
 	}
 	if (right)
 	{
-		locationX += speed * SDLAPP.GetDeltaTime();
+		locationX += speed * APP.GetDeltaTime();
 	}
 }
 void TestEntity::Render()
 {
-	SDL_Rect loc;
-	loc.x = (int)locationX;
-	loc.y = (int)locationY;
-	SDL_BlitSurface(sprite, NULL, SDLAPP.GetSurface(), &loc);
+	//SDL_Rect loc;
+	//loc.x = (int)locationX;
+	//loc.y = (int)locationY;
+	//SDL_BlitSurface(sprite, NULL, SDLAPP.GetSurface(), &loc);
 }
 
 void TestEntity::MoveUp(bool b)

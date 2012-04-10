@@ -11,7 +11,7 @@
 #include <iostream>
 #include <map>
 #include <string>
-#include "SDL_App.hpp"
+#include "GLFW_App.hpp"
 #include "LogManager.hpp"
 #include "../game/AbstractState.hpp"
 #include "../util/Util.hpp"

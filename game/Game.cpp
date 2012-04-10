@@ -6,11 +6,9 @@
  */
 
 #include "Game.hpp"
-#include "../util/ImageLoader.hpp"
 
 Game::Game()
 {
-	background = load_image("data/background.png");
 	isEntered = true;
 
 	tank = new TestEntity(this);
@@ -26,7 +24,7 @@ Game::~Game()
 		delete entity;
 	}
 	entities.clear();
-	SDL_FreeSurface(background);
+	//SDL_FreeSurface(background);
 }
 
 void Game::Pause()
@@ -43,7 +41,7 @@ void Game::Update()
 {
 	if (isEntered)
 	{
-		enteredTime += SDLAPP.GetDeltaTime();
+		enteredTime += APP.GetDeltaTime();
 		if (enteredTime>0.5f)
 		{
 			isEntered   = false;
@@ -51,17 +49,17 @@ void Game::Update()
 		}
 	}
 
-	bool spaceButton = SDLAPP.GetKey(SDLK_SPACE);
+	bool spaceButton = APP.GetKey(GLFW_KEY_SPACE);
 	if (spaceButton&&!isEntered)
 	{
 		Engine *engine = Engine::Instance();
 		engine->ChangesState("intro");
 	}
 
-	tank->MoveUp   (SDLAPP.GetKey(SDLK_UP)   ||SDLAPP.GetKey(SDLK_w));
-	tank->MoveDown (SDLAPP.GetKey(SDLK_DOWN) ||SDLAPP.GetKey(SDLK_s));
-	tank->MoveLeft (SDLAPP.GetKey(SDLK_LEFT) ||SDLAPP.GetKey(SDLK_a));
-	tank->MoveRight(SDLAPP.GetKey(SDLK_RIGHT)||SDLAPP.GetKey(SDLK_d));
+	tank->MoveUp   (APP.GetKey(GLFW_KEY_UP)   );
+	tank->MoveDown (APP.GetKey(GLFW_KEY_DOWN) );
+	tank->MoveLeft (APP.GetKey(GLFW_KEY_LEFT) );
+	tank->MoveRight(APP.GetKey(GLFW_KEY_RIGHT));
 
 	for (unsigned int i=0; i<entities.size(); i++)
 	{
@@ -71,7 +69,7 @@ void Game::Update()
 }
 void Game::Render()
 {
-	SDL_FillRect(SDLAPP.GetSurface(), NULL , 0x221122);
+	//SDL_FillRect(SDLAPP.GetSurface(), NULL , 0x221122);
 
 	for (unsigned int i=0; i<entities.size(); i++)
 	{
