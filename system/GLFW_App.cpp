@@ -17,12 +17,13 @@ GLFWApp::GLFWApp()
 	wnd_height = 600;
 	int redBits   = 8, greenBits = 8,  blueBits    = 8;
 	int alphaBits = 8, depthBits = 24, stencilBits = 8;
+	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 4);
+	//glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 1);
 	if (!glfwOpenWindow(wnd_width,wnd_height,redBits,greenBits,blueBits,alphaBits,depthBits,stencilBits,GLFW_WINDOW))
 	{
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
-
 	GLenum err = glewInit();
 	if (GLEW_OK != err)
 	{
@@ -30,9 +31,9 @@ GLFWApp::GLFWApp()
 	}
 	fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
-	if (GLEW_VERSION_1_3)
+	if (GLEW_VERSION_2_1)
 	{
-		fprintf(stdout, "OpenGL 1.3 is supported\n");
+		fprintf(stdout, "OpenGL 2.1 is supported\n");
 	}
 	if (GLEW_VERSION_3_3)
 	{
