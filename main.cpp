@@ -15,11 +15,11 @@ int main(int argc, char **argv)
 {
 	Engine *game = new Engine();
 
-	Intro intro;
-	game->AddGameState(&intro);
+//	Intro intro;
+//	game->AddGameState(&intro);
 
-	/*game->AddGameState(new Intro());
-	game->AddGameState(new Menu());
+	//game->AddGameState(new Intro());
+	/*game->AddGameState(new Menu());
 	game->AddGameState(new Game());
 	game->AddGameState(new End());*/
 
