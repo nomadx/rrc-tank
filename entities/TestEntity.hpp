@@ -29,7 +29,6 @@ protected:
 private:
 	AbstractState* state;
 
-	//SDL_Surface* sprite;
 	float locationX;
 	float locationY;
 	float speed;

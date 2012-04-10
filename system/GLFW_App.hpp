@@ -37,7 +37,6 @@ private:
 	double buffTime;
 	int    framesPerSec;
 	int    frameCnt;
-	int    timer;
 
 	std::vector<int> keys;
 	int  mouseWheel;
@@ -46,6 +45,5 @@ private:
 	int wnd_width;
 	int wnd_height;
 };
-
 
 #endif /* GLFW_APP_HPP_ */

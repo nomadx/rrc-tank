@@ -24,8 +24,6 @@ public:
 	void Log(std::string message);
 
 private:
-	std::fstream out;
-	char* filename;
 };
 
 #endif /* LOGMANAGER_HPP_ */

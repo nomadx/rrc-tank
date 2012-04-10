@@ -25,7 +25,6 @@ GLFWApp::GLFWApp()
 	glfwSetWindowTitle("RRC framework");
 	framesPerSec  = 0;
 	frameCnt      = 0;
-	//timer         = glfwGetTime();
 	startTime     = glfwGetTime();
 	deltaTime     = 0.001f;
 	buffTime      = 0.0f;

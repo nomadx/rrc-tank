@@ -12,7 +12,6 @@
 TestEntity::TestEntity(AbstractState* pState)
 {
 	state  = pState;
-	//sprite = load_image("data/tank/mockup_tank1.png");
 	locationX = 0.0f;
 	locationY = 0.0f;
 	speed = 50.0f;
@@ -24,7 +23,6 @@ TestEntity::TestEntity(AbstractState* pState)
 
 TestEntity::~TestEntity()
 {
-	//SDL_FreeSurface(sprite);
 }
 
 void TestEntity::Update()
@@ -48,10 +46,6 @@ void TestEntity::Update()
 }
 void TestEntity::Render()
 {
-	//SDL_Rect loc;
-	//loc.x = (int)locationX;
-	//loc.y = (int)locationY;
-	//SDL_BlitSurface(sprite, NULL, SDLAPP.GetSurface(), &loc);
 }
 
 void TestEntity::MoveUp(bool b)

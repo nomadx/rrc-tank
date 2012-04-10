@@ -24,7 +24,6 @@ Game::~Game()
 		delete entity;
 	}
 	entities.clear();
-	//SDL_FreeSurface(background);
 }
 
 void Game::Pause()
@@ -56,10 +55,10 @@ void Game::Update()
 		engine->ChangesState("intro");
 	}
 
-	tank->MoveUp   (APP.GetKey(GLFW_KEY_UP)   );
-	tank->MoveDown (APP.GetKey(GLFW_KEY_DOWN) );
-	tank->MoveLeft (APP.GetKey(GLFW_KEY_LEFT) );
-	tank->MoveRight(APP.GetKey(GLFW_KEY_RIGHT));
+	tank->MoveUp   (APP.GetKey(GLFW_KEY_UP)   ||APP.GetKey('W'));
+	tank->MoveDown (APP.GetKey(GLFW_KEY_DOWN) ||APP.GetKey('S'));
+	tank->MoveLeft (APP.GetKey(GLFW_KEY_LEFT) ||APP.GetKey('A'));
+	tank->MoveRight(APP.GetKey(GLFW_KEY_RIGHT)||APP.GetKey('D'));
 
 	for (unsigned int i=0; i<entities.size(); i++)
 	{
@@ -69,12 +68,10 @@ void Game::Update()
 }
 void Game::Render()
 {
-	//SDL_FillRect(SDLAPP.GetSurface(), NULL , 0x221122);
 
 	for (unsigned int i=0; i<entities.size(); i++)
 	{
 		IEntity* entity = entities[i];
 		entity->Render();
 	}
-//	SDL_BlitSurface(background, NULL, SDLAPP.GetSurface(), NULL);
 }
