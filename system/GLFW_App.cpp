@@ -39,11 +39,7 @@ GLFWApp::GLFWApp()
 	{
 		fprintf(stdout, "OpenGL 3.3 is supported\n");
 	}
-	if (GLEW_VERSION_4_0)
-	{
-		fprintf(stdout, "OpenGL 4.0 is supported\n");
-	}
-	if (GLEW_VERSION_4_1)
+	if (GLEW_VERSION_4_0||GLEW_VERSION_4_1)
 	{
 		fprintf(stdout, "OpenGL 4.0 is supported\n");
 	}
