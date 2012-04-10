@@ -22,6 +22,35 @@ GLFWApp::GLFWApp()
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
+
+	GLenum err = glewInit();
+	if (GLEW_OK != err)
+	{
+		exit(EXIT_FAILURE);
+	}
+	fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
+
+	if (GLEW_VERSION_1_3)
+	{
+		fprintf(stdout, "OpenGL 1.3 is supported\n");
+	}
+	if (GLEW_VERSION_3_3)
+	{
+		fprintf(stdout, "OpenGL 3.3 is supported\n");
+	}
+	if (GLEW_VERSION_4_0)
+	{
+		fprintf(stdout, "OpenGL 4.0 is supported\n");
+	}
+	if (GLEW_VERSION_4_1)
+	{
+		fprintf(stdout, "OpenGL 4.0 is supported\n");
+	}
+	if (GLEW_VERSION_4_2)
+	{
+		fprintf(stdout, "OpenGL 4.0 is supported\n");
+	}
+
 	glfwSetWindowTitle("RRC framework");
 	framesPerSec  = 0;
 	frameCnt      = 0;

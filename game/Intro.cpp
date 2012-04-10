@@ -44,7 +44,7 @@ void Intro::Update()
 			enteredTime = 0.0;
 		}
 	}
-	bool spaceButton = APP.GetKey(GLFW_KEY_SPACE);
+	bool spaceButton = APP.GetKey(GLFW_KEY_F1);
 	if (spaceButton&&!isEntered)
 	{
 		Engine *engine = Engine::Instance();

@@ -53,7 +53,7 @@ void Game::Update()
 		}
 	}
 
-	bool spaceButton = APP.GetKey(GLFW_KEY_SPACE);
+	bool spaceButton = APP.GetKey(GLFW_KEY_F1);
 	if (spaceButton&&!isEntered)
 	{
 		Engine *engine = Engine::Instance();

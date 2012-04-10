@@ -10,6 +10,8 @@
 
 #include "../util/Singleton.hpp"
 #include <vector>
+#define GLEW_STATIC
+#include "GL/glew.h"
 #include "GL/glfw.h"
 
 class GLFWApp : public Singleton<GLFWApp>
