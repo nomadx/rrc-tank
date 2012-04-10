@@ -10,6 +10,7 @@
 
 #include "AbstractState.hpp"
 #include "../system/Engine.hpp"
+#include "../graphics/ShaderManager.hpp"
 
 class Intro : public AbstractState
 {
@@ -23,11 +24,18 @@ public:
 	void Update();
 	void Render();
 
+	void InitializeGL();
+
 protected:
 private:
-
 	bool isEntered;
 	float enteredTime;
+
+	ShaderManager shaderManager;
+
+	// render-лэх өгөгдлүүд
+	GLuint vaoID;
+	GLuint vertexbuffer;
 };
 
 #endif /* INTRO_HPP_ */

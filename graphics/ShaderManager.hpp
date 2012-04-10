@@ -8,7 +8,6 @@
 #ifndef SHADERMANAGER_HPP_
 #define SHADERMANAGER_HPP_
 
-#include "../util/Singleton.hpp"
 #include "GL/glew.h"
 #include <iostream>
 #include <vector>
@@ -16,8 +15,8 @@
 #include "Shader.hpp"
 #include "ShaderProgram.hpp"
 
-class ShaderManager: public Singleton<ShaderManager> {
-	friend class Singleton<ShaderManager> ;
+class ShaderManager
+{
 public:
 	ShaderManager();
 	~ShaderManager();
