@@ -7,7 +7,7 @@
 
 #ifndef SHADERPROGRAM_HPP_
 #define SHADERPROGRAM_HPP_
-
+#define GLEW_STATIC
 #include "GL/glew.h"
 #include <iostream>
 #include <vector>

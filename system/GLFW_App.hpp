@@ -14,6 +14,7 @@
 #include "GL/glew.h"
 #include "GL/glfw.h"
 
+
 class GLFWApp : public Singleton<GLFWApp>
 {
 	friend class Singleton<GLFWApp>;
