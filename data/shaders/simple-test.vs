@@ -1,7 +1,12 @@
-#version 330 core
+#version 150 core
 
-layout(location = 0) in vec3 vertexPosition_modelspace;
+in vec3 inPosition;
+in vec3 inColour;
 
-void main(){
-    gl_Position.xyz = vertexPosition_modelspace;
+out vec3 vertColour;
+
+void main()
+{
+    gl_Position = vec4(inPosition, 1.0);
+    vertColour = inColour;
 }

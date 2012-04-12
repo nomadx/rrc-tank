@@ -33,9 +33,9 @@ private:
 
 	ShaderManager shaderManager;
 
-	// render-лэх өгөгдлүүдэд хэрэглэх буфер
-	GLuint vaoID;
-	GLuint vertexbuffer;
+	// рэндэрлэх өгөгдлүүдэд хэрэглэнэ
+	GLuint vaoID[2];
+	GLuint vboID[3];
 };
 
 #endif /* INTRO_HPP_ */
