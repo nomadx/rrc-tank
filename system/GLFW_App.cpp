@@ -43,7 +43,10 @@ GLFWApp::GLFWApp()
 	{
 		fprintf(stdout, "OpenGL 4.0 is supported\n");
 	}
-
+	if (GLEW_VERSION_4_2)
+	{
+		fprintf(stdout, "OpenGL 4.2 is supported\n");
+	}
 	glViewport(0, 0, wndWidth, wndHeight);
 
 	glfwSetWindowTitle("RRC framework");
@@ -53,8 +56,6 @@ GLFWApp::GLFWApp()
 	deltaTime     = 0.001f;
 	buffTime      = 0.0f;
 	isRunning     = true;
-
-	//glfwSetMousePosCallback(GLFWApp::HandleMouseMove);
 }
 
 GLFWApp::~GLFWApp()
@@ -121,13 +122,7 @@ void GLFWApp::SetCursorVisible(bool b)
 	else
 		glfwEnable(GLFW_MOUSE_CURSOR);
 }
-/*void GLFWApp::HandleMouseMove(int x, int y)
-{
-	deltaX = x - midWidth;
-	deltaY = y - midHeight;
-	glfwSetMousePos(midWidth, midHeight);
-}
-*/
+
 int GLFWApp::GetDeltaX()
 {
 	return deltaX;

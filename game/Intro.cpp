@@ -55,7 +55,7 @@ void Intro::Update() {
 	camera.MoveBackward(shouldMoveBackward);
 	camera.MoveLeft    (shouldMoveLeft);
 	camera.MoveRight   (shouldMoveRight);
-	camera.SetFOV(APP.GetMouseWheel());
+	camera.UpdateFOV(APP.GetMouseWheel());
 
 	float angleX = (float)APP.GetDeltaX();
 	float angleY = (float)APP.GetDeltaY();

@@ -33,7 +33,6 @@ public:
 	int  GetMouseWheel();
 
 	void SetCursorVisible(bool b);
-	//void HandleMouseMove(int x, int y);
 	int  GetDeltaX();
 	int  GetDeltaY();
 

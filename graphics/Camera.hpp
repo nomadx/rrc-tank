@@ -30,7 +30,7 @@ public:
 	void UpdateHorizontalAngle(float hori);
 	void UpdateVerticalAngle  (float vert);
 	void SetDim(float height, float width);
-	void SetFOV(float fov);
+	void UpdateFOV(float fov);
 
 	void MoveForward (bool b);
 	void MoveBackward(bool b);
