@@ -11,12 +11,7 @@
 #include <iostream>
 #define GLEW_STATIC
 #include "GL/glew.h"
-/*#ifdef _WIN32
-	#include "GL/wglew.h"
-#else
-	#include "GL/glxew.h"
-#endif
-*/
+
 enum SHADERTYPE{VERTEX, FRAGMENT, GEOMETRY, TESS_EVAL, TESS_CNTRL};
 
 class Shader
