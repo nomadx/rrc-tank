@@ -14,9 +14,7 @@
 int main(void)
 {
 	int x = 5;
-	std::cout<<" first assert : \n";
 	ASSERT(x==5);
-	std::cout<<" second assert : \n ";
 	ASSERT(x!=5);
 
 	Engine *engine = Engine::Instance();
