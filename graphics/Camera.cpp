@@ -41,7 +41,7 @@ void Camera::Update()
 		0,
 		cos(horizontAngle - M_PI/2.0f)
 	);
-	glm::vec3 up = glm::cross(right, dir);
+	up = glm::cross(right, dir);
 
 	if (moveForward)
 		pos += dir * moveSpeed * dt;
@@ -81,18 +81,18 @@ glm::vec3 Camera::GetUp()
 	return up;
 }
 
-void Camera::SetAngles(float hori, float vert)
+void Camera::UpdateAngles(float hori, float vert)
 {
-	horizontAngle = hori;
-	verticalAngle = vert;
+	horizontAngle += hori;
+	verticalAngle += vert;
 }
-void Camera::SetHorizontalAngle(float hori)
+void Camera::UpdateHorizontalAngle(float hori)
 {
-	horizontAngle = hori;
+	horizontAngle += hori;
 }
-void Camera::SetVerticalAngle(float vert)
+void Camera::UpdateVerticalAngle(float vert)
 {
-	verticalAngle = vert;
+	verticalAngle += vert;
 }
 void Camera::SetDim(float height, float width)
 {

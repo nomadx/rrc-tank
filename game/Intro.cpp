@@ -14,6 +14,7 @@
 Intro::Intro() {
 	isEntered = true;
 	InitializeGL();
+	APP.SetCursorVisible(false);
 }
 
 Intro::~Intro() {
@@ -50,12 +51,15 @@ void Intro::Update() {
 	bool shouldMoveBackward = APP.GetKey('S');
 	bool shouldMoveLeft     = APP.GetKey('A');
 	bool shouldMoveRight    = APP.GetKey('D');
-
 	camera.MoveForward (shouldMoveForward);
 	camera.MoveBackward(shouldMoveBackward);
 	camera.MoveLeft    (shouldMoveLeft);
 	camera.MoveRight   (shouldMoveRight);
 	camera.SetFOV(APP.GetMouseWheel());
+
+	float angleX = (float)APP.GetDeltaX();
+	float angleY = (float)APP.GetDeltaY();
+	camera.UpdateAngles(angleX, angleY);
 
 	camera.Update();
 

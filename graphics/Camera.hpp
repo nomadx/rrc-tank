@@ -26,9 +26,9 @@ public:
 	glm::vec3 GetDir();
 	glm::vec3 GetUp();
 
-	void SetAngles(float hori, float vert);
-	void SetHorizontalAngle(float hori);
-	void SetVerticalAngle  (float vert);
+	void UpdateAngles(float hori, float vert);
+	void UpdateHorizontalAngle(float hori);
+	void UpdateVerticalAngle  (float vert);
 	void SetDim(float height, float width);
 	void SetFOV(float fov);
 

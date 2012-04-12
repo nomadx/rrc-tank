@@ -13,13 +13,13 @@ GLFWApp::GLFWApp()
 {
 	if (!glfwInit())
 		exit(EXIT_FAILURE);
-	wnd_width  = 800;
-	wnd_height = 600;
+	wndWidth  = 800; midWidth  = wndWidth/2;
+	wndHeight = 600; midHeight = wndHeight/2;
 	int redBits   = 8, greenBits = 8,  blueBits    = 8;
 	int alphaBits = 8, depthBits = 24, stencilBits = 8;
 	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3); // OpenGL 4.2
 	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 2);
-	if (!glfwOpenWindow(wnd_width,wnd_height,redBits,greenBits,blueBits,alphaBits,depthBits,stencilBits,GLFW_WINDOW))
+	if (!glfwOpenWindow(wndWidth,wndHeight,redBits,greenBits,blueBits,alphaBits,depthBits,stencilBits,GLFW_WINDOW))
 	{
 		glfwTerminate();
 		exit(EXIT_FAILURE);
@@ -44,7 +44,7 @@ GLFWApp::GLFWApp()
 		fprintf(stdout, "OpenGL 4.0 is supported\n");
 	}
 
-	glViewport(0, 0, wnd_width, wnd_height);
+	glViewport(0, 0, wndWidth, wndHeight);
 
 	glfwSetWindowTitle("RRC framework");
 	framesPerSec  = 0;
@@ -53,6 +53,8 @@ GLFWApp::GLFWApp()
 	deltaTime     = 0.001f;
 	buffTime      = 0.0f;
 	isRunning     = true;
+
+	//glfwSetMousePosCallback(GLFWApp::HandleMouseMove);
 }
 
 GLFWApp::~GLFWApp()
@@ -63,6 +65,12 @@ GLFWApp::~GLFWApp()
 void GLFWApp::HandleInput()
 {
 	isRunning = !glfwGetKey(GLFW_KEY_ESC) && glfwGetWindowParam(GLFW_OPENED);
+	int x = 0;
+	int y = 0;
+	glfwGetMousePos(&x, &y);
+	deltaX = x - midWidth;
+	deltaY = y - midHeight;
+	glfwSetMousePos(midWidth, midHeight);
 }
 void GLFWApp::UpdateVideo()
 {
@@ -104,4 +112,27 @@ bool GLFWApp::GetKey(int key)
 int GLFWApp::GetMouseWheel()
 {
 	return glfwGetMouseWheel();
+}
+
+void GLFWApp::SetCursorVisible(bool b)
+{
+	if (!b)
+		glfwDisable(GLFW_MOUSE_CURSOR);
+	else
+		glfwEnable(GLFW_MOUSE_CURSOR);
+}
+/*void GLFWApp::HandleMouseMove(int x, int y)
+{
+	deltaX = x - midWidth;
+	deltaY = y - midHeight;
+	glfwSetMousePos(midWidth, midHeight);
+}
+*/
+int GLFWApp::GetDeltaX()
+{
+	return deltaX;
+}
+int GLFWApp::GetDeltaY()
+{
+	return deltaY;
 }

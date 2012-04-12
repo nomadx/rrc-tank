@@ -32,6 +32,11 @@ public:
 	bool GetKey(int key);
 	int  GetMouseWheel();
 
+	void SetCursorVisible(bool b);
+	//void HandleMouseMove(int x, int y);
+	int  GetDeltaX();
+	int  GetDeltaY();
+
 protected:
 private:
 	bool   isRunning;
@@ -45,8 +50,12 @@ private:
 	int  mouseWheel;
 	bool mouseCentered;
 
-	int wnd_width;
-	int wnd_height;
+	int wndWidth;
+	int wndHeight;
+	int midWidth;
+	int midHeight;
+	int deltaX;
+	int deltaY;
 };
 
 #endif /* GLFW_APP_HPP_ */
