@@ -11,6 +11,7 @@
 #include "AbstractState.hpp"
 #include "../system/Engine.hpp"
 #include "../graphics/ShaderManager.hpp"
+#include "../graphics/Camera.hpp"
 
 class Intro : public AbstractState
 {
@@ -31,9 +32,12 @@ private:
 	bool isEntered;
 	float enteredTime;
 
+	Camera camera;
 	ShaderManager shaderManager;
 
 	// рэндэрлэх өгөгдлүүдэд хэрэглэнэ
+	glm::mat4 mvpMat;
+	glm::mat4 modelMat;
 	GLuint vaoID[2];
 	GLuint vboID[3];
 };

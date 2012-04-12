@@ -17,7 +17,7 @@ Camera::Camera()
 	verticalAngle = 0.0f;
 	width         = 800.0f;
 	height        = 600.0f;
-	moveSpeed     = 30.0f;
+	moveSpeed     = 1.0f;
 	sensitivity   = 0.001f;
 	fov           = 60.0f;
 	zNear         = 1.0;

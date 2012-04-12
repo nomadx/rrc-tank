@@ -39,12 +39,27 @@ void Intro::Update() {
 			enteredTime = 0.0;
 		}
 	}
+
 	bool changeButton = APP.GetKey(GLFW_KEY_F1);
 	if (changeButton && !isEntered) {
 		Engine *engine = Engine::Instance();
 		engine->ChangesState("game");
 	}
 
+	bool shouldMoveForward  = APP.GetKey('W');
+	bool shouldMoveBackward = APP.GetKey('S');
+	bool shouldMoveLeft     = APP.GetKey('A');
+	bool shouldMoveRight    = APP.GetKey('D');
+
+	camera.MoveForward (shouldMoveForward);
+	camera.MoveBackward(shouldMoveBackward);
+	camera.MoveLeft    (shouldMoveLeft);
+	camera.MoveRight   (shouldMoveRight);
+	camera.SetFOV(APP.GetMouseWheel());
+
+	camera.Update();
+
+	mvpMat = modelMat * camera.GetViewMat() * camera.GetProjMat();
 }
 void Intro::Render() {
 	glClearColor(0.0f, 0.5f, 1.0f, 0.0f);
@@ -52,13 +67,13 @@ void Intro::Render() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	shaderManager["Simple"]->Activate();
+	shaderManager["Simple"]->SetUniformMatrix4fv("uMVP", 1, GL_FALSE, &mvpMat[0][0]);
 
 	glBindVertexArray(vaoID[0]);		// эхний VAO-г сонгох
 	glDrawArrays(GL_TRIANGLES, 0, 3);	// эхний объектийг зурах
 
 	glBindVertexArray(vaoID[1]);		// хоёр дахь VAO
 	shaderManager["Simple"]->VertexAttrib3f("inColour",1.0,0.0,0.0);
-	//glVertexAttrib3f((GLuint)1, 1.0, 0.0, 0.0); // set constant color attribute
 	glDrawArrays(GL_TRIANGLES, 0, 3);	// хоёр дахь объектийг зурах
 }
 
@@ -81,6 +96,7 @@ void Intro::InitializeGL() {
 	shaderManager.LinkProgramObject("Simple");
 	shaderManager["Simple"]->Activate();
 
+	modelMat = glm::mat4(1);
 
 	// эхний объект
 	float* vert = new float[9];	// vertex array
