@@ -12,7 +12,7 @@
 
 Camera::Camera()
 {
-	pos           = glm::vec3(0, 0, 0);
+	pos           = glm::vec3(0, 0, -3);
 	horizontAngle = 0.0f;
 	verticalAngle = 0.0f;
 	width         = 800.0f;
@@ -54,7 +54,7 @@ void Camera::Update()
 
 	if (!height>0)
 		height = 1;
-	projMat = glm::perspective(fov, width/height, zNear, 1000.0f);
+	projMat = glm::perspective(fov, width/height, zNear, zFar);
 	viewMat = glm::lookAt(pos, pos + dir, up);
 
 }
@@ -66,6 +66,10 @@ glm::mat4 Camera::GetViewMat()
 glm::mat4 Camera::GetProjMat()
 {
 	return projMat;
+}
+glm::mat4 Camera::GetVPMat()
+{
+	return projMat * viewMat;
 }
 
 glm::vec3 Camera::GetPos()
@@ -83,16 +87,16 @@ glm::vec3 Camera::GetUp()
 
 void Camera::UpdateAngles(float hori, float vert)
 {
-	horizontAngle += hori * sensitivity;
-	verticalAngle += vert * sensitivity;
+	horizontAngle -= hori * sensitivity;
+	verticalAngle -= vert * sensitivity;
 }
 void Camera::UpdateHorizontalAngle(float hori)
 {
-	horizontAngle += hori;
+	horizontAngle -= hori;
 }
 void Camera::UpdateVerticalAngle(float vert)
 {
-	verticalAngle += vert;
+	verticalAngle -= vert;
 }
 void Camera::SetDim(float height, float width)
 {

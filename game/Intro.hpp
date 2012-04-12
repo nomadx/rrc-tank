@@ -38,6 +38,7 @@ private:
 	// рэндэрлэх өгөгдлүүдэд хэрэглэнэ
 	glm::mat4 mvpMat;
 	glm::mat4 modelMat;
+
 	GLuint vaoID[2];
 	GLuint vboID[3];
 };

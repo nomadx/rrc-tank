@@ -30,6 +30,8 @@ void Intro::Resume() {
 	char str[30];
 	sprintf(str, "entered Intro state.");
 	glfwSetWindowTitle(str);
+
+	APP.SetCursorVisible(false);
 }
 
 void Intro::Update() {
@@ -63,7 +65,7 @@ void Intro::Update() {
 
 	camera.Update();
 
-	mvpMat = modelMat * camera.GetViewMat() * camera.GetProjMat();
+	mvpMat =  modelMat * camera.GetProjMat() * camera.GetViewMat();
 }
 void Intro::Render() {
 	glClearColor(0.0f, 0.5f, 1.0f, 0.0f);

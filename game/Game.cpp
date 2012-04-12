@@ -39,6 +39,8 @@ void Game::Resume()
 	char str[30];
 	sprintf(str, "entered Game state.");
 	glfwSetWindowTitle(str);
+
+	APP.SetCursorVisible(true);
 }
 
 void Game::Update()

@@ -21,6 +21,7 @@ public:
 
 	glm::mat4 GetViewMat();
 	glm::mat4 GetProjMat();
+	glm::mat4 GetVPMat();
 
 	glm::vec3 GetPos();
 	glm::vec3 GetDir();
