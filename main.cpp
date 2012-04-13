@@ -3,6 +3,7 @@
  *
  *  Created on: Apr 3, 2012
  *      Author: Sharavsambuu
+ *
  */
 
 #include <iostream>
@@ -21,7 +22,6 @@ int main(void)
 
 	engine->AddGameState("intro", new Intro());
 	engine->AddGameState("game" , new Game());
-
 	engine->ChangesState("intro");
 
 	while(engine->KeepRunning())
