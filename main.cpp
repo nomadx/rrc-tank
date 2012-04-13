@@ -3,6 +3,8 @@
  *
  *  Created on: Apr 3, 2012
  *      Author: Sharavsambuu
+ *      Edited by: Puunaa
+ *
  */
 
 #include <iostream>
@@ -17,21 +19,10 @@ int main(void)
 	ASSERT(x==5);
 	ASSERT(x!=5);
 
-<<<<<<< HEAD
-//	Intro intro;
-//	game->AddGameState(&intro);
-
-	//game->AddGameState(new Intro());
-	/*game->AddGameState(new Menu());
-	game->AddGameState(new Game());
-	game->AddGameState(new End());*/
-=======
 	Engine *engine = Engine::Instance();
 
 	engine->AddGameState("intro", new Intro());
 	engine->AddGameState("game" , new Game());
->>>>>>> upstream/master
-
 	engine->ChangesState("intro");
 
 	while(engine->KeepRunning())
