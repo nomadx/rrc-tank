@@ -18,7 +18,7 @@ GLFWApp::GLFWApp()
 	int redBits   = 8, greenBits = 8,  blueBits    = 8;
 	int alphaBits = 8, depthBits = 24, stencilBits = 8;
 	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3); // OpenGL 4.2
-	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 2);
+	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 3);
 	if (!glfwOpenWindow(wndWidth,wndHeight,redBits,greenBits,blueBits,alphaBits,depthBits,stencilBits,GLFW_WINDOW))
 	{
 		glfwTerminate();
