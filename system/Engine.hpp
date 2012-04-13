@@ -9,7 +9,12 @@
 #define ENGINE_HPP_
 
 #include <iostream>
+#include <map>
+#include <string>
+#include "GLFW_App.hpp"
+#include "LogManager.hpp"
 #include "../game/AbstractState.hpp"
+#include "../util/Util.hpp"
 
 class Engine
 {
@@ -17,20 +22,29 @@ public:
 	Engine();
 	~Engine();
 
-	bool keepRunning();
+	bool KeepRunning();
 
 	void Update();
 	void Render();
 	void HandleInput();
 	void UpdateVideo();
 
-	void AddGameState(AbstractState& state);
+	void AddGameState(const std::string& name, AbstractState* state);
+	void ChangesState(const std::string& name);
 
 	void Exit();
 
+	static Engine* Instance() {
+		return &engineInstance;
+	}
+
 protected:
 private:
+	static Engine engineInstance;
+
 	bool isRunning;
+	AbstractState* currentState;
+	std::map<std::string, AbstractState*> states;
 };
 
 #endif /* ENGINE_HPP_ */

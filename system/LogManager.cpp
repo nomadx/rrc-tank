@@ -5,3 +5,20 @@
  *      Author: sharavsambuu
  */
 
+#include "LogManager.hpp"
+
+LogManager::LogManager()
+{
+}
+
+LogManager::~LogManager()
+{
+}
+
+void LogManager::Init(char* filename)
+{
+}
+
+void LogManager::Log(std::string message)
+{
+}

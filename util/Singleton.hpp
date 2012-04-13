@@ -16,7 +16,7 @@ protected:
 	Singleton(){}
 	virtual ~Singleton(){}
 public:
-	static inline T& getInstance()
+	static inline T& GetInstance()
 	{
 		if (instance == NULL)
 		{
@@ -24,7 +24,7 @@ public:
 		}
 		return *instance;
 	}
-	static inline void killInstance()
+	static inline void KillInstance()
 	{
 		if (instance != NULL)
 		{
