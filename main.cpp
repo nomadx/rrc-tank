@@ -3,7 +3,6 @@
  *
  *  Created on: Apr 3, 2012
  *      Author: Sharavsambuu
- *      Edited by: Puunaa
  *
  */
 
