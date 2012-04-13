@@ -9,6 +9,11 @@
 #include "stdlib.h"
 #include <stdio.h>
 
+#define GLFW_OPENGL_VERSION_MAJOR 4
+#define GLFW_OPENGL_VERSION_MINOR 2
+#define GLFW_OPENGL_PROFILE 4
+#define GLFW_OPENGL_CORE_PROFILE 4
+
 GLFWApp::GLFWApp()
 {
 	if (!glfwInit())
@@ -17,8 +22,12 @@ GLFWApp::GLFWApp()
 	wndHeight = 600; midHeight = wndHeight/2;
 	int redBits   = 8, greenBits = 8,  blueBits    = 8;
 	int alphaBits = 8, depthBits = 24, stencilBits = 8;
-	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3); // OpenGL 4.2
+
+	glfwOpenWindowHint(GLFW_FSAA_SAMPLES, 4);
+	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3);
 	glfwOpenWindowHint(GLFW_OPENGL_VERSION_MINOR, 3);
+	glfwOpenWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
 	if (!glfwOpenWindow(wndWidth,wndHeight,redBits,greenBits,blueBits,alphaBits,depthBits,stencilBits,GLFW_WINDOW))
 	{
 		glfwTerminate();
@@ -43,10 +52,7 @@ GLFWApp::GLFWApp()
 	{
 		fprintf(stdout, "OpenGL 4.0 is supported\n");
 	}
-	if (GLEW_VERSION_4_2)
-	{
-		fprintf(stdout, "OpenGL 4.2 is supported\n");
-	}
+
 	glViewport(0, 0, wndWidth, wndHeight);
 
 	glfwSetWindowTitle("RRC framework");
