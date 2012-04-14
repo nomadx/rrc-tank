@@ -11,6 +11,7 @@
 #include "system/Engine.hpp"
 #include "game/Intro.hpp"
 #include "game/Game.hpp"
+#include "game/Demo01.hpp"
 
 int main(void)
 {
@@ -22,7 +23,9 @@ int main(void)
 
 	engine->AddGameState("intro", new Intro());
 	engine->AddGameState("game" , new Game());
-	engine->ChangesState("intro");
+	engine->AddGameState("demo01", new Demo01());
+
+	engine->ChangesState("demo01");
 
 	while(engine->KeepRunning())
 	{
