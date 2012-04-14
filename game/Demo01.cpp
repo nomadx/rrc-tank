@@ -74,10 +74,12 @@ void Demo01::Render() {
 
 	shaderManager["Simple"]->Activate();
 	shaderManager["Simple"]->SetUniformMatrix4fv("uMVP", 1, GL_FALSE, &mvpMat[0][0]);
+	glBindTexture(GL_TEXTURE_2D, textureID);
+	shaderManager["Simple"]->SetUniform1i("uTexture", 0);
 
 	glBindVertexArray(vaoID[0]);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
-
+	shaderManager["Simple"]->Deactivate();
 }
 
 void Demo01::InitializeGL() {
@@ -85,37 +87,36 @@ void Demo01::InitializeGL() {
 
 	shaderManager.AttachShader("SimpleVertex"  , VERTEX);
 	shaderManager.AttachShader("SimpleFragment", FRAGMENT);
-	shaderManager.LoadShaderSource("SimpleVertex"  , "data/shaders/demo01/simple-test.vs");
-	shaderManager.LoadShaderSource("SimpleFragment", "data/shaders/demo01/simple-test.fs");
+	shaderManager.LoadShaderSource("SimpleVertex"  , "data/shaders/demo01/texture.vert.glsl");
+	shaderManager.LoadShaderSource("SimpleFragment", "data/shaders/demo01/grey.frag.glsl");
 
 	shaderManager.CompileShader("SimpleVertex");
 	shaderManager.CompileShader("SimpleFragment");
-	shaderManager.AttachShaderToProgram("Simple","SimpleVertex");
-	shaderManager.AttachShaderToProgram("Simple","SimpleFragment");
+	shaderManager.AttachShaderToProgram("Simple", "SimpleVertex");
+	shaderManager.AttachShaderToProgram("Simple", "SimpleFragment");
 
-	shaderManager.BindAttribute("Simple",0,"inPosition");
-	shaderManager.BindAttribute("Simple",1,"inColour");
+	shaderManager.BindAttribute("Simple", 0, "inPosition");
+	shaderManager.BindAttribute("Simple", 1, "inTexCoord");
 
 	shaderManager.LinkProgramObject("Simple");
 	shaderManager["Simple"]->Activate();
 
 	modelMat = glm::mat4(1);
 
-	// эхний объект
-	float* vert = new float[12];	// vertex array
-	float* col  = new float[12];	// color array
-	vert[0] =-0.8; vert[ 1] = 0.5; vert[ 2] =-1.0;
-	vert[3] =-0.8; vert[ 4] =-0.5; vert[ 5] =-1.0;
-	vert[6] = 0.2; vert[ 7] =-0.5; vert[ 8]= -1.0;
-	vert[9] = 0.2; vert[10] = 0.5; vert[11]= -1.0;
-	col[0] = 1.0; col[ 1] = 0.0; col[ 2] = 0.0;
-	col[3] = 0.0; col[ 4] = 1.0; col[ 5] = 0.0;
-	col[6] = 0.0; col[ 7] = 0.0; col[ 8] = 1.0;
-	col[9] = 1.0; col[10] = 0.0; col[11] = 1.0;
 
-	glGenVertexArrays(1, &vaoID[0]); // хоёр ширхэг VAO үүсгэх
+	float* vert = new float[12];
+	vert[0] =  1.0f; vert[ 1] = 0.0f; vert[ 2] =-1.0f;
+	vert[3] =  1.0f; vert[ 4] = 0.0f; vert[ 5] = 1.0f;
+	vert[6] = -1.0f; vert[ 7] = 0.0f; vert[ 8]=  1.0f;
+	vert[9] = -1.0f; vert[10] = 0.0f; vert[11]= -1.0f;
 
-	// эхний VAO
+	float* texCoords  = new float[8];
+	texCoords[0] = 0.0f; texCoords[1] = 0.0f;
+	texCoords[2] = 1.0f; texCoords[3] = 0.0f;
+	texCoords[4] = 1.0f; texCoords[5] = 1.0f;
+	texCoords[6] = 0.0f; texCoords[7] = 1.0f;
+
+	glGenVertexArrays(1, &vaoID[0]);
 	glBindVertexArray(vaoID[0]);
 	glGenBuffers(2, vboID);
 	glBindBuffer(GL_ARRAY_BUFFER, vboID[0]);
@@ -123,12 +124,20 @@ void Demo01::InitializeGL() {
 	shaderManager["Simple"]->VertexAttribPointer("inPosition",3,GL_FLOAT,0,0);
 	shaderManager["Simple"]->EnableAttribArray("inPosition");
 	glBindBuffer(GL_ARRAY_BUFFER, vboID[1]);
-	glBufferData(GL_ARRAY_BUFFER, 12*sizeof(GLfloat), col, GL_STATIC_DRAW);
-	shaderManager["Simple"]->VertexAttribPointer("inColour",3,GL_FLOAT,0,0);
-	shaderManager["Simple"]->EnableAttribArray("inColour");
-
+	glBufferData(GL_ARRAY_BUFFER, 8*sizeof(GLfloat), texCoords, GL_STATIC_DRAW);
+	shaderManager["Simple"]->VertexAttribPointer("inTexCoord",2,GL_FLOAT,0,0);
+	shaderManager["Simple"]->EnableAttribArray("inTexCoord");
 	delete [] vert;
-	delete [] col;
+	delete [] texCoords;
+
+	glGenTextures(1, &textureID);
+	glBindTexture(GL_TEXTURE_2D, textureID);
+	glfwLoadTexture2D("data/images/textures/sharavaa.tga", 0);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glGenerateMipmap(GL_TEXTURE_2D);
 
 }
 

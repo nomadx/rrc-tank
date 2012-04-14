@@ -44,6 +44,7 @@ private:
 
 	GLuint vaoID[1];
 	GLuint vboID[2];
+	GLuint textureID;
 };
 
 
