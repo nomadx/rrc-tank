@@ -3,4 +3,6 @@ Debug/
 Release/
 .cproject
 .project
+.directory
 .settings/
+
