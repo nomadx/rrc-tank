@@ -20,7 +20,7 @@ Camera::Camera()
 	moveSpeed     = 1.0f;
 	sensitivity   = 0.001f;
 	fov           = 60.0f;
-	zNear         = 1.0;
+	zNear         = 0.01;
 	zFar          = 1000.0f;
 }
 Camera::~Camera()

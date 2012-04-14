@@ -1,4 +1,8 @@
+*.o
 Debug/
+Release/
 .cproject
 .project
+.directory
 .settings/
+
