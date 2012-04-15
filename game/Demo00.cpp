@@ -114,31 +114,46 @@ void Demo00::Initialize() {
 
 
 	// эндээс эхлээд gpu-рүү рэндэрлэх гэж байгаа өгөгдлөө upload хийж хуулах үйл ажиллагаа явагдана.
-	float* vertices = new float[18];	// дөрвөлжин дүрсний оройнуудын утгыг хадгална
 
+	float* vertices = new float[18];	// дөрвөлжин дүрсний оройнуудын утгыг хадгална
 	// дөрвөлжин дүрс үүсгэхийн тулд хоёр ширхэг гурвалжин ашиглана
-	// эхний гурвалжин
-	vertices[ 0] = -0.5; vertices[ 1] = -0.5; vertices[ 2] = 0.0; // зүүн доод өнцөг
+	vertices[ 0] = -0.5; vertices[ 1] = -0.5; vertices[ 2] = 0.0; // зүүн доод өнцөг // эхний гурвалжин
 	vertices[ 3] = -0.5; vertices[ 4] =  0.5; vertices[ 5] = 0.0; // зүүн дээд өнцөг
 	vertices[ 6] =  0.5; vertices[ 7] =  0.5; vertices[ 8] = 0.0; // баруун дээд өнцөг
-	// дараагийн гурвалжин
-	vertices[ 9] =  0.5; vertices[10] = -0.5; vertices[11] = 0.0; // баруун доод өнцөг
+	vertices[ 9] =  0.5; vertices[10] = -0.5; vertices[11] = 0.0; // баруун доод өнцөг // дараагийн гурвалжин
 	vertices[12] = -0.5; vertices[13] = -0.5; vertices[14] = 0.0; // зүүн доод өнцөг
 	vertices[15] =  0.5; vertices[16] =  0.5; vertices[17] = 0.0; // баруун дээд өнцөг
 	// энэ хоёр гурвалжинг нийлүүлээд огторгуйд төсөөлөн бодож үзээрэй.
 
+	float *colors = new float[18];
+	colors[ 0] = 1.0; colors[ 1] = 1.0; colors[ 2] = 1.0; // зүүн доод оройны өнгө // эхний гурвалжин
+	colors[ 3] = 1.0; colors[ 4] = 0.0; colors[ 5] = 0.0; // зүүн дээд оройны өнгө
+	colors[ 6] = 0.0; colors[ 7] = 1.0; colors[ 8] = 0.0; // баруун дээд оройны өнгө
+	colors[ 9] = 0.0; colors[10] = 0.0; colors[11] = 1.0; // баруун доод оройны өнгө // дараагийн гурвалжин
+	colors[12] = 1.0; colors[13] = 1.0; colors[14] = 1.0; // зүүн доод оройны өнгө
+	colors[15] = 0.0; colors[16] = 1.0; colors[17] = 0.0; // баруун дээд оройны өнгө
+
+
 	glGenVertexArrays(1, &vaoID[0]); // Vertex Array Object үүсгэх
 	glBindVertexArray(vaoID[0]); // үүсгэсэн Vertex Array Object оо хэрэглэхээр тохируулах
 
-	glGenBuffers(1, vboID); // Vertex Buffer Object үүсгэх.
+	glGenBuffers(2, &vboID[0]); // байршилууд болон өнгөнүүдэд зориулж Vertex Buffer Object-үүд үүсгэх. 2 тоо нь хоёр ширхэг буфер үүсгэж байгааг илтгэнэ
+	// цэгэн оройн байршлуудад зориулагдсан буфер үүсгээд өгөгдөл хийх
 	glBindBuffer(GL_ARRAY_BUFFER, vboID[0]); // үүсгэсэн Vertex Buffer Object оо хэрэглэхээр тохируулах
 	glBufferData(GL_ARRAY_BUFFER, 18 * sizeof(GLfloat), vertices, GL_STATIC_DRAW); // VBO ийнхөө хэмжээг тохируулөөд өгөгдөл хийх. Ингэснээр gpu дээр үүссэн буфферт цэгүүдийн мэдээлэл upload хийгдэн очих болно
-	glVertexAttribPointer((GLuint)0, 3, GL_FLOAT, GL_FALSE, 0, 0); // vertex attributes заагчийг тохируулах. буферт гурав гурваар нь хандаж авна гэдгийг зааж байна.
+	shaderManager["Simple"]->VertexAttribPointer("in_Position", 3, GL_FLOAT, 0, 0); // vertex attributes заагчийг тохируулах. буферт гурав гурваар нь хандаж авна гэдгийг зааж байна.
+	shaderManager["Simple"]->EnableAttribArray("in_Position");
+	// оройн өнгөний мэдээлэлд зориулагдсан буфер үүсгээд өгөгдлүүд хийх
+	glBindBuffer(GL_ARRAY_BUFFER, vboID[1]); // үүсгэсэн Vertex Buffer Object оо хэрэглэхээр тохируулах
+	glBufferData(GL_ARRAY_BUFFER, 18 * sizeof(GLfloat), colors, GL_STATIC_DRAW); // VBO ийнхөө хэмжээг тохируулөөд өгөгдөл хийх. Ингэснээр gpu дээр үүссэн буфферт цэгүүдийн мэдээлэл upload хийгдэн очих болно
+	shaderManager["Simple"]->VertexAttribPointer("in_Color", 3, GL_FLOAT, 0, 0); // vertex attributes заагчийг тохируулах. буферт гурав гурваар нь хандаж авна гэдгийг зааж байна.
+	shaderManager["Simple"]->EnableAttribArray("in_Color");
 
-	glEnableVertexAttribArray(0); // идэвхижүүлсэн байгаа Vertex Array Object-оо болиулах
-	glBindVertexArray(0); // идэвхижүүлсэн байгаа Vertex Buffer Object-оо болиулах
+	glEnableVertexAttribArray(0);
+	glBindVertexArray(0);
 
 	delete [] vertices; // Програмын санах ойд хуваарилаж үүсгэсэн массиваа санах ойгоос устгах. Цаашид ашиглах шаардлагагүй учир нь энэ массив дээрхи өгөгдөл сая GPU-рүү upload хийгдсэн байгаа.
+	delete [] colors;   // Програмын санах ойд хуваарилаж үүсгэсэн массиваа санах ойгоос устгах. Цаашид ашиглах шаардлагагүй учир нь энэ массив дээрхи өгөгдөл сая GPU-рүү upload хийгдсэн байгаа.
 }
 
 
