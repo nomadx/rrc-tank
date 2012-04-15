@@ -1,5 +1,5 @@
 
-![image](http://dl.dropbox.com/u/3482121/picture/RRC/RRC-framework/camera-control.png "image")
+![image](file:///home/sharav/Pictures/realtime-renderer-club/stanford-dragon.png "image")
 ![image](http://dl.dropbox.com/u/3482121/picture/RRC/RRC-framework/running-on-windows.png "image")
 
 Энгийн 2D танк бичих замаар 

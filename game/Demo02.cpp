@@ -124,7 +124,7 @@ void Demo02::Initialize() {
 
 	//----------------------------
 	std::auto_ptr<ObjModel> model(new ObjModel);
-	model->Load("data/model/obj/bunny.obj");
+	model->Load("data/model/obj/dragon.obj");
 			triangleCount = model->faces.size();
 	GLsizei vertexCount   = model->vertices.size();
 
