@@ -85,6 +85,16 @@ glm::vec3 Camera::GetUp()
 	return up;
 }
 
+float Camera::GetWidth()
+{
+	return width;
+}
+
+float Camera::GetHeight()
+{
+	return height;
+}
+
 void Camera::UpdateAngles(float hori, float vert)
 {
 	horizontAngle -= hori * sensitivity;
