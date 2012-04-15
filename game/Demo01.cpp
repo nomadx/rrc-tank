@@ -101,8 +101,9 @@ void Demo01::InitializeGL() {
 	shaderManager.LinkProgramObject("Simple");
 	shaderManager["Simple"]->Activate();
 
-	modelMat = glm::mat4(1);
 
+	modelMat = glm::mat4(1);
+	//modelMat = glm::translate(modelMat, glm::vec3(0,-1.5,0));
 
 	float* vert = new float[12];
 	vert[0] =  1.0f; vert[ 1] = 0.0f; vert[ 2] =-1.0f;
@@ -115,6 +116,8 @@ void Demo01::InitializeGL() {
 	texCoords[2] = 1.0f; texCoords[3] = 0.0f;
 	texCoords[4] = 1.0f; texCoords[5] = 1.0f;
 	texCoords[6] = 0.0f; texCoords[7] = 1.0f;
+	//for (int i=0; i<8; i++)
+		//texCoords[i] *= 150;
 
 	glGenVertexArrays(1, &vaoID[0]);
 	glBindVertexArray(vaoID[0]);
@@ -130,6 +133,7 @@ void Demo01::InitializeGL() {
 	delete [] vert;
 	delete [] texCoords;
 
+	glActiveTexture(GL_TEXTURE0);
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glfwLoadTexture2D("data/images/textures/sharavaa.tga", 0);
