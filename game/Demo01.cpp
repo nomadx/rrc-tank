@@ -13,14 +13,14 @@
 
 Demo01::Demo01() {
 	isEntered = true;
-	InitializeGL();
+	Initialize();
 	APP.SetCursorVisible(false);
 }
 
 Demo01::~Demo01() {
-	/*glDeleteBuffers(2, &vboID); vboID = 0;
-	glDeleteTextures(1, &textureID); textureID = 0;
-	glDeteleVertexArrays(1, &vaoID[1]); vaoID = 0;*/
+	glDeleteVertexArrays(1, &vaoID[0]);
+	glDeleteBuffers(1, &vboID[0]);
+	glDeleteTextures(1, &textureID);
 }
 
 void Demo01::Pause() {
@@ -85,7 +85,7 @@ void Demo01::Render() {
 	shaderManager["Simple"]->Deactivate();
 }
 
-void Demo01::InitializeGL() {
+void Demo01::Initialize() {
 	shaderManager.CreateShaderProgram("Simple");
 
 	shaderManager.AttachShader("SimpleVertex"  , VERTEX);

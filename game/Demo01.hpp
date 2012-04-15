@@ -29,7 +29,7 @@ public:
 	void Update();
 	void Render();
 
-	void InitializeGL();
+	void Initialize();
 
 protected:
 private:
