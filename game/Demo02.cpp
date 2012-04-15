@@ -21,7 +21,7 @@ Demo02::~Demo02()
 		glDeleteVertexArrays(1, &vaoID[0]);
 	}
 	if (vboID) {
-		glDeleteBuffers(2, &vboID[0]);
+		glDeleteBuffers(3, &vboID[0]);
 	}
 	if (textureID) {
 		glDeleteTextures(1, &textureID);
@@ -91,12 +91,13 @@ void Demo02::Render() {
 		shaderManager["Simple"]->SetUniformMatrix4fv("viewMatrix"      , 1, GL_FALSE, &viewMatrix      [0][0]);
 		shaderManager["Simple"]->SetUniformMatrix4fv("projectionMatrix", 1, GL_FALSE, &projectionMatrix[0][0]);
 
-		glActiveTexture(GL_TEXTURE0);
+		/*glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, textureID);
-		shaderManager["Simple"]->SetUniform1i("uTexture", 0);
+		shaderManager["Simple"]->SetUniform1i("uTexture", 0);*/
 
 		glBindVertexArray(vaoID[0]);
-			glDrawArrays(GL_TRIANGLES, 0, 6);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboID[0]);
+			glDrawElements(GL_TRIANGLES, triangleCount * 3, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 	}
 	shaderManager["Simple"]->Deactivate(); // shader програмаа хэрэглэж болсон бол идэвхигүй болгох
@@ -107,8 +108,8 @@ void Demo02::Initialize() {
 
 	shaderManager.AttachShader("SimpleVertex"  , VERTEX);
 	shaderManager.AttachShader("SimpleFragment", FRAGMENT);
-	shaderManager.LoadShaderSource("SimpleVertex"  , "data/shaders/demo01/texture.vert.glsl");
-	shaderManager.LoadShaderSource("SimpleFragment", "data/shaders/demo01/grey.frag.glsl");
+	shaderManager.LoadShaderSource("SimpleVertex"  , "data/shaders/demo02/texture.vert.glsl");
+	shaderManager.LoadShaderSource("SimpleFragment", "data/shaders/demo02/grey.frag.glsl");
 
 	shaderManager.CompileShader("SimpleVertex");
 	shaderManager.CompileShader("SimpleFragment");
@@ -124,7 +125,7 @@ void Demo02::Initialize() {
 	//----------------------------
 	std::auto_ptr<ObjModel> model(new ObjModel);
 	model->Load("data/model/obj/bunny.obj");
-	GLsizei triangleCount = model->faces.size();
+			triangleCount = model->faces.size();
 	GLsizei vertexCount   = model->vertices.size();
 
 	glGenBuffers(3, &vboID[0]);

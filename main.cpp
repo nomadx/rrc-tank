@@ -29,7 +29,7 @@ int main(void)
 	engine->AddGameState("demo01", new Demo01());
 	engine->AddGameState("demo02", new Demo02());
 
-	engine->ChangesState("demo01");
+	engine->ChangesState("demo02");
 
 	while(engine->KeepRunning())
 	{

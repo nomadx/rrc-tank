@@ -46,6 +46,7 @@ private:
 	GLuint vboID[3]; // Vertex Buffer Object {element, positions, normals}
 	GLuint textureID; // texture
 
+	GLsizei triangleCount;
 };
 
 #endif /* DEMO02_HPP_ */
