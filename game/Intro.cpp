@@ -18,6 +18,12 @@ Intro::Intro() {
 }
 
 Intro::~Intro() {
+	if (vaoID) {
+		glDeleteVertexArrays(2, &vaoID[0]);
+	}
+	if (vboID) {
+		glDeleteBuffers(3, &vboID[0]);
+	}
 }
 
 void Intro::Pause() {

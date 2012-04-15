@@ -19,8 +19,12 @@ Demo00::Demo00() {
 }
 
 Demo00::~Demo00() {
-	glDeleteVertexArrays(1, &vaoID[0]);
-	glDeleteBuffers(1, &vboID[0]);
+	if (vaoID) {
+		glDeleteVertexArrays(1, &vaoID[0]);
+	}
+	if (vboID) {
+		glDeleteBuffers(1, &vboID[0]);
+	}
 }
 
 void Demo00::Pause() {
