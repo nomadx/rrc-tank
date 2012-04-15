@@ -106,6 +106,13 @@ void Demo01::InitializeGL() {
 	//modelMat = glm::translate(modelMat, glm::vec3(0,-1.5,0));
 
 	float* vert = new float[12];
+	/*{
+		-1.0f, -1.0f, 0.0f,
+		 1.0f, -1.0f, 1.0f,
+		 0.0f,  1.0f, 1.0f,
+		 1.0f,  0.0f, 1.0f,
+		 1.0f, -1.0f, 0.0f,
+		 1.0f, -1.0f,-1.0f};*/
 	vert[0] =  1.0f; vert[ 1] = 0.0f; vert[ 2] =-1.0f;
 	vert[3] =  1.0f; vert[ 4] = 0.0f; vert[ 5] = 1.0f;
 	vert[6] = -1.0f; vert[ 7] = 0.0f; vert[ 8]=  1.0f;
