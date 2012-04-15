@@ -69,6 +69,10 @@ void Demo00::Update() {
 	camera.Update();
 
 	modelMatrix      = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f)); // моделийн матрицыг утгаар цэнэглэх буюу моделийн хэмжээс хоёр дахин том болно гэдгийг тохируулж өглөө
+	static float angle = 0.0f;
+	angle += APP.GetDeltaTime() * 5.0f;
+	modelMatrix      = glm::rotate(modelMatrix, angle, glm::vec3(0, 1, 0));
+
 	viewMatrix       = camera.GetViewMat(); // камераас view матрицийн утгыг авах
 	projectionMatrix = camera.GetProjMat(); // камераас projection матрицийн утгыг авах
 }

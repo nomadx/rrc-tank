@@ -8,6 +8,10 @@
 #ifndef DEMO00_HPP_
 #define DEMO00_HPP_
 
+/**
+ * Энэ демогоор VBO болон VAO нарыг хэрхэн хэрэглэх талаар үзэх болно.
+ * */
+
 
 #include "AbstractState.hpp"
 #include "../system/Engine.hpp"
