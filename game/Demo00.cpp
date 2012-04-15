@@ -31,7 +31,7 @@ void Demo00::Resume() {
 	enteredTime = 0.0f;
 
 	char str[30];
-	sprintf(str, "entered Intro state.");
+	sprintf(str, "entered Demo00 state.");
 	glfwSetWindowTitle(str);
 
 	APP.SetCursorVisible(false);

@@ -31,7 +31,7 @@ void Demo01::Resume() {
 	enteredTime = 0.0f;
 
 	char str[30];
-	sprintf(str, "entered Intro state.");
+	sprintf(str, "entered Demo01 state.");
 	glfwSetWindowTitle(str);
 
 	APP.SetCursorVisible(false);
@@ -68,21 +68,26 @@ void Demo01::Update() {
 
 	camera.Update();
 
-	mvpMat =  modelMat * camera.GetProjMat() * camera.GetViewMat();
+	modelMatrix      = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f));
+	viewMatrix       = camera.GetViewMat();
+	projectionMatrix = camera.GetProjMat();
 }
 void Demo01::Render() {
+	glViewport(0, 0, (int)camera.GetWidth(),(int)camera.GetHeight());
 	glClearColor(0.0f, 0.5f, 1.0f, 0.0f);
 	glClearDepth(1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 	shaderManager["Simple"]->Activate();
-	shaderManager["Simple"]->SetUniformMatrix4fv("uMVP", 1, GL_FALSE, &mvpMat[0][0]);
-	glBindTexture(GL_TEXTURE_2D, textureID);
-	shaderManager["Simple"]->SetUniform1i("uTexture", 0);
-
-	glBindVertexArray(vaoID[0]);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
-	shaderManager["Simple"]->Deactivate();
+	{
+		shaderManager["Simple"]->SetUniformMatrix4fv("modelMatrix"     , 1, GL_FALSE, &modelMatrix     [0][0]);
+		shaderManager["Simple"]->SetUniformMatrix4fv("viewMatrix"      , 1, GL_FALSE, &viewMatrix      [0][0]);
+		shaderManager["Simple"]->SetUniformMatrix4fv("projectionMatrix", 1, GL_FALSE, &projectionMatrix[0][0]);
+		glBindVertexArray(vaoID[0]);
+			glDrawArrays(GL_TRIANGLES, 0, 6);
+		glBindVertexArray(0);
+	}
+	shaderManager["Simple"]->Deactivate(); // shader програмаа хэрэглэж болсон бол идэвхигүй болгох
 }
 
 void Demo01::Initialize() {
@@ -104,45 +109,47 @@ void Demo01::Initialize() {
 	shaderManager.LinkProgramObject("Simple");
 	shaderManager["Simple"]->Activate();
 
+	// эндээс эхлээд gpu-рүү рэндэрлэх гэж байгаа өгөгдлөө upload хийж хуулах үйл ажиллагаа явагдана.
 
-	modelMat = glm::mat4(1);
-	//modelMat = glm::translate(modelMat, glm::vec3(0,-1.5,0));
+	float* vertices = new float[18];
+	vertices[ 0] = -0.5; vertices[ 1] = -0.5; vertices[ 2] = 0.0; // зүүн доод өнцөг // эхний гурвалжин
+	vertices[ 3] = -0.5; vertices[ 4] =  0.5; vertices[ 5] = 0.0; // зүүн дээд өнцөг
+	vertices[ 6] =  0.5; vertices[ 7] =  0.5; vertices[ 8] = 0.0; // баруун дээд өнцөг
+	vertices[ 9] =  0.5; vertices[10] = -0.5; vertices[11] = 0.0; // баруун доод өнцөг // дараагийн гурвалжин
+	vertices[12] = -0.5; vertices[13] = -0.5; vertices[14] = 0.0; // зүүн доод өнцөг
+	vertices[15] =  0.5; vertices[16] =  0.5; vertices[17] = 0.0; // баруун дээд өнцөг
 
-	float* vert = new float[12];
-	/*{
-		-1.0f, -1.0f, 0.0f,
-		 1.0f, -1.0f, 1.0f,
-		 0.0f,  1.0f, 1.0f,
-		 1.0f,  0.0f, 1.0f,
-		 1.0f, -1.0f, 0.0f,
-		 1.0f, -1.0f,-1.0f};*/
-	vert[0] =  1.0f; vert[ 1] = 0.0f; vert[ 2] =-1.0f;
-	vert[3] =  1.0f; vert[ 4] = 0.0f; vert[ 5] = 1.0f;
-	vert[6] = -1.0f; vert[ 7] = 0.0f; vert[ 8]=  1.0f;
-	vert[9] = -1.0f; vert[10] = 0.0f; vert[11]= -1.0f;
+	float *coords = new float[12];
+	coords[ 0] = 0.0; coords[ 1] = 0.0; // зүүн доод оройны өнгө // эхний гурвалжин
+	coords[ 2] = 0.0; coords[ 3] = 1.0; // зүүн дээд оройны өнгө
+	coords[ 4] = 1.0; coords[ 5] = 1.0; // баруун дээд оройны өнгө
+	coords[ 6] = 1.0; coords[ 7] = 0.0; // баруун доод оройны өнгө // дараагийн гурвалжин
+	coords[ 8] = 0.0; coords[ 9] = 0.0; // зүүн доод оройны өнгө
+	coords[10] = 1.0; coords[11] = 1.0; // баруун дээд оройны өнгө
 
-	float* texCoords  = new float[8];
-	texCoords[0] = 0.0f; texCoords[1] = 0.0f;
-	texCoords[2] = 1.0f; texCoords[3] = 0.0f;
-	texCoords[4] = 1.0f; texCoords[5] = 1.0f;
-	texCoords[6] = 0.0f; texCoords[7] = 1.0f;
-	//for (int i=0; i<8; i++)
-		//texCoords[i] *= 150;
 
 	glGenVertexArrays(1, &vaoID[0]);
 	glBindVertexArray(vaoID[0]);
-	glGenBuffers(2, vboID);
-	glBindBuffer(GL_ARRAY_BUFFER, vboID[0]);
-	glBufferData(GL_ARRAY_BUFFER, 12*sizeof(GLfloat), vert, GL_STATIC_DRAW);
-	shaderManager["Simple"]->VertexAttribPointer("inPosition",3,GL_FLOAT,0,0);
-	shaderManager["Simple"]->EnableAttribArray("inPosition");
-	glBindBuffer(GL_ARRAY_BUFFER, vboID[1]);
-	glBufferData(GL_ARRAY_BUFFER, 8*sizeof(GLfloat), texCoords, GL_STATIC_DRAW);
-	shaderManager["Simple"]->VertexAttribPointer("inTexCoord",2,GL_FLOAT,0,0);
-	shaderManager["Simple"]->EnableAttribArray("inTexCoord");
-	delete [] vert;
-	delete [] texCoords;
 
+	glGenBuffers(2, &vboID[0]);
+	// цэгэн оройн байршлуудад зориулагдсан буфер үүсгээд өгөгдөл хийх
+	glBindBuffer(GL_ARRAY_BUFFER, vboID[0]);
+	glBufferData(GL_ARRAY_BUFFER, 18 * sizeof(GLfloat), vertices, GL_STATIC_DRAW);
+	shaderManager["Simple"]->VertexAttribPointer("inPosition", 3, GL_FLOAT, 0, 0);
+	shaderManager["Simple"]->EnableAttribArray("inPosition");
+	// текстур буулгалтын координатуудад зориулагдсан буфер үүсгээд өгөгдлүүд хийх
+	glBindBuffer(GL_ARRAY_BUFFER, vboID[1]);
+	glBufferData(GL_ARRAY_BUFFER, 12 * sizeof(GLfloat), coords, GL_STATIC_DRAW);
+	shaderManager["Simple"]->VertexAttribPointer("inTexCoord", 2, GL_FLOAT, 0, 0);
+	shaderManager["Simple"]->EnableAttribArray("inTexCoord");
+
+	glEnableVertexAttribArray(0);
+	glBindVertexArray(0);
+
+	delete [] vertices;
+	delete [] coords;
+
+	// текстур зураг уншиж авах хэсэг
 	glActiveTexture(GL_TEXTURE0);
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_2D, textureID);

@@ -39,12 +39,13 @@ private:
 	Camera camera;
 	ShaderManager shaderManager;
 
-	glm::mat4 mvpMat;
-	glm::mat4 modelMat; // рэндэрлэж байгаа объектийн хувиргалтын матриц
+	glm::mat4 modelMatrix;
+	glm::mat4 viewMatrix;
+	glm::mat4 projectionMatrix;
 
-	GLuint vaoID[1];
-	GLuint vboID[2];
-	GLuint textureID;
+	GLuint vaoID[1];  // Vertex Array Object
+	GLuint vboID[2];  // Vertex Buffer Object {positions, texCoords}
+	GLuint textureID; // texture
 };
 
 
