@@ -83,6 +83,11 @@ void Demo01::Render() {
 		shaderManager["Simple"]->SetUniformMatrix4fv("modelMatrix"     , 1, GL_FALSE, &modelMatrix     [0][0]);
 		shaderManager["Simple"]->SetUniformMatrix4fv("viewMatrix"      , 1, GL_FALSE, &viewMatrix      [0][0]);
 		shaderManager["Simple"]->SetUniformMatrix4fv("projectionMatrix", 1, GL_FALSE, &projectionMatrix[0][0]);
+
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, textureID);
+		shaderManager["Simple"]->SetUniform1i("uTexture", 0);
+
 		glBindVertexArray(vaoID[0]);
 			glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindVertexArray(0);
