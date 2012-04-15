@@ -2,7 +2,7 @@
  * Demo02.hpp
  *
  *  Created on: Apr 15, 2012
- *      Author: sharav
+ *      Author: sharavsambuu
  */
 
 #ifndef DEMO02_HPP_
@@ -42,8 +42,8 @@ private:
 	glm::mat4 viewMatrix;
 	glm::mat4 projectionMatrix;
 
-	GLuint vaoID[1]; // Vertex Array Object
-	GLuint vboID[2]; // Vertex Buffer Object {positions, texCoords}
+	GLuint vaoID[2]; // Vertex Array Object {vertex, normal}
+	GLuint vboID[3]; // Vertex Buffer Object {element, positions, normals}
 	GLuint textureID; // texture
 
 };

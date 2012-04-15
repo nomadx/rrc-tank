@@ -6,6 +6,8 @@
  */
 
 #include "Demo02.hpp"
+#include "../graphics/ObjModel.hpp"
+#include <memory>
 
 Demo02::Demo02()
 {
@@ -114,61 +116,43 @@ void Demo02::Initialize() {
 	shaderManager.AttachShaderToProgram("Simple", "SimpleFragment");
 
 	shaderManager.BindAttribute("Simple", 0, "inPosition");
-	shaderManager.BindAttribute("Simple", 1, "inTexCoord");
+	shaderManager.BindAttribute("Simple", 1, "inNormal");
 
 	shaderManager.LinkProgramObject("Simple");
 	shaderManager["Simple"]->Activate();
 
-	// эндээс эхлээд gpu-рүү рэндэрлэх гэж байгаа өгөгдлөө upload хийж хуулах үйл ажиллагаа явагдана.
+	//----------------------------
+	std::auto_ptr<ObjModel> model(new ObjModel);
+	model->Load("data/model/obj/bunny.obj");
+	GLsizei triangleCount = model->faces.size();
+	GLsizei vertexCount   = model->vertices.size();
 
-	float* vertices = new float[18];
-	vertices[ 0] = -0.5; vertices[ 1] = -0.5; vertices[ 2] = 0.0; // зүүн доод өнцөг // эхний гурвалжин
-	vertices[ 3] = -0.5; vertices[ 4] =  0.5; vertices[ 5] = 0.0; // зүүн дээд өнцөг
-	vertices[ 6] =  0.5; vertices[ 7] =  0.5; vertices[ 8] = 0.0; // баруун дээд өнцөг
-	vertices[ 9] =  0.5; vertices[10] = -0.5; vertices[11] = 0.0; // баруун доод өнцөг // дараагийн гурвалжин
-	vertices[12] = -0.5; vertices[13] = -0.5; vertices[14] = 0.0; // зүүн доод өнцөг
-	vertices[15] =  0.5; vertices[16] =  0.5; vertices[17] = 0.0; // баруун дээд өнцөг
-
-	float *coords = new float[12];
-	coords[ 0] = 0.0; coords[ 1] = 0.0; // зүүн доод оройны өнгө // эхний гурвалжин
-	coords[ 2] = 0.0; coords[ 3] = 1.0; // зүүн дээд оройны өнгө
-	coords[ 4] = 1.0; coords[ 5] = 1.0; // баруун дээд оройны өнгө
-	coords[ 6] = 1.0; coords[ 7] = 0.0; // баруун доод оройны өнгө // дараагийн гурвалжин
-	coords[ 8] = 0.0; coords[ 9] = 0.0; // зүүн доод оройны өнгө
-	coords[10] = 1.0; coords[11] = 1.0; // баруун дээд оройны өнгө
-
+	glGenBuffers(3, &vboID[0]);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboID[0]); // elements
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)*3*triangleCount, &*model->faces.begin(), GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, vboID[1]); // vertices
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLuint)*3*vertexCount, &*model->vertices.begin(), GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, vboID[2]); // normals
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLuint)*3*vertexCount, &*model->normals.begin(), GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	glGenVertexArrays(1, &vaoID[0]);
 	glBindVertexArray(vaoID[0]);
 
-	glGenBuffers(2, &vboID[0]);
-	// цэгэн оройн байршлуудад зориулагдсан буфер үүсгээд өгөгдөл хийх
-	glBindBuffer(GL_ARRAY_BUFFER, vboID[0]);
-	glBufferData(GL_ARRAY_BUFFER, 18 * sizeof(GLfloat), vertices, GL_STATIC_DRAW);
-	shaderManager["Simple"]->VertexAttribPointer("inPosition", 3, GL_FLOAT, 0, 0);
-	shaderManager["Simple"]->EnableAttribArray("inPosition");
-	// текстур буулгалтын координатуудад зориулагдсан буфер үүсгээд өгөгдлүүд хийх
 	glBindBuffer(GL_ARRAY_BUFFER, vboID[1]);
-	glBufferData(GL_ARRAY_BUFFER, 12 * sizeof(GLfloat), coords, GL_STATIC_DRAW);
-	shaderManager["Simple"]->VertexAttribPointer("inTexCoord", 2, GL_FLOAT, 0, 0);
-	shaderManager["Simple"]->EnableAttribArray("inTexCoord");
+	shaderManager["Simple"]->VertexAttribPointer("inPosition", 3, GL_FLOAT, 0, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, vboID[2]);
+	shaderManager["Simple"]->VertexAttribPointer("inNormal", 3, GL_FLOAT, 0, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	shaderManager["Simple"]->EnableAttribArray("inPosition");
+	shaderManager["Simple"]->EnableAttribArray("inNormal");
 	glBindVertexArray(0);
 
-	delete [] vertices;
-	delete [] coords;
-
-	// текстур зураг уншиж авах хэсэг
-	glActiveTexture(GL_TEXTURE0);
-	glGenTextures(1, &textureID);
-	glBindTexture(GL_TEXTURE_2D, textureID);
-	glfwLoadTexture2D("data/images/textures/sharavaa.tga", 0);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glGenerateMipmap(GL_TEXTURE_2D);
 
 }
 
