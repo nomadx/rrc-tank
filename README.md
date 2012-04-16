@@ -1,6 +1,6 @@
 
 ![image](http://dl.dropbox.com/u/3482121/picture/RRC/RRC-framework/stanford-bunny4.png "image")
-![image](http://dl.dropbox.com/u/3482121/picture/RRC/RRC-framework/running-on-windows.png "image")
+![image](http://dl.dropbox.com/u/3482121/picture/RRC/RRC-framework/bunny-windows.png "image")
 
 OpenGL бичихэд хэрэглэх фрэймворк үүсгэх зорилготой
 
