@@ -21,6 +21,7 @@ uniform MaterialProperties uMaterial;
 
 in vec3 vEye;
 in vec3 vNormal;
+in vec4 temp;
 
 layout(location = 0, index = 0) out vec4 fragColor;
 
@@ -39,5 +40,6 @@ void main(void)
         color += uLight.diffuseColor * uMaterial.diffuseColor * nDotL;        
         color += uLight.specularColor * uMaterial.specularColor * pow(eDotR, uMaterial.specularExponent);
     }
-    fragColor = color;
+    fragColor = color;    
+    
 }

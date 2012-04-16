@@ -11,10 +11,11 @@ in vec3 inNormal;
 out vec3 vEye;
 out vec3 vNormal;
 
+
 void main(void)
 {
     vec4 vertex = viewMatrix * modelMatrix * vec4(inPosition, 1.0);
     vEye        = -vec3(vertex);
-    vNormal     = normalMatrix * inNormal;
-    gl_Position = projectionMatrix * vertex;
+    vNormal     = normalMatrix * inNormal;    
+    gl_Position = projectionMatrix * vertex;;
 }
