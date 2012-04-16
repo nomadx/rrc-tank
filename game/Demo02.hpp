@@ -60,7 +60,7 @@ private:
 	glm::mat4 projectionMatrix;
 	glm::mat3 normalMatrix;
 
-	GLuint vaoID[2]; // Vertex Array Object {vertex, normal}
+	GLuint vaoID[1]; // Vertex Array Object
 	GLuint vboID[3]; // Vertex Buffer Object {element, positions, normals}
 	GLuint textureID; // texture
 

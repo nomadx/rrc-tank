@@ -2,16 +2,17 @@
 ![image](http://dl.dropbox.com/u/3482121/picture/RRC/RRC-framework/stanford-dragon.png "image")
 ![image](http://dl.dropbox.com/u/3482121/picture/RRC/RRC-framework/running-on-windows.png "image")
 
-Энгийн 2D танк бичих замаар 
 OpenGL бичихэд хэрэглэх фрэймворк үүсгэх зорилготой
 
 Энэ Demo нь заавал бүрэн тоглоом болох албагүй
 
+Програм эхлүүлээд F1 товч дараарай.
+
 Ашиглагдсан сангууд
- - GLFW
- - GLEW
- - OpenGL
- - GLM
+- GLFW
+- GLEW
+- OpenGL
+- GLM
 
 Хийгдэх зүйлс
 

@@ -12,8 +12,8 @@
 #include "GL/glew.h"
 
 Intro::Intro() {
-	isEntered = true;
-	InitializeGL();
+	isEntered   = true;
+	isFirstTime = true;
 	APP.SetCursorVisible(false);
 }
 
@@ -38,6 +38,12 @@ void Intro::Resume() {
 	glfwSetWindowTitle(str);
 
 	APP.SetCursorVisible(false);
+
+	if(isFirstTime)
+	{
+		Initialize();
+		isFirstTime = false;
+	}
 }
 
 void Intro::Update() {
@@ -71,25 +77,31 @@ void Intro::Update() {
 
 	camera.Update();
 
+	modelMat = glm::mat4(1);
 	mvpMat =  modelMat * camera.GetProjMat() * camera.GetViewMat();
+
 }
 void Intro::Render() {
+	glViewport(0, 0, (int)camera.GetWidth(),(int)camera.GetHeight());
 	glClearColor(0.0f, 0.5f, 1.0f, 0.0f);
 	glClearDepth(1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	shaderManager["Simple"]->Activate();
-	shaderManager["Simple"]->SetUniformMatrix4fv("uMVP", 1, GL_FALSE, &mvpMat[0][0]);
+	{
+		shaderManager["Simple"]->SetUniformMatrix4fv("uMVP", 1, GL_FALSE, &mvpMat[0][0]);
 
-	glBindVertexArray(vaoID[0]);		// эхний VAO-г сонгох
-	glDrawArrays(GL_TRIANGLES, 0, 3);	// эхний объектийг зурах
+		glBindVertexArray(vaoID[0]);		// эхний VAO-г сонгох
+		glDrawArrays(GL_TRIANGLES, 0, 3);	// эхний объектийг зурах
 
-	glBindVertexArray(vaoID[1]);		// хоёр дахь VAO
-	shaderManager["Simple"]->VertexAttrib3f("inColour",1.0,0.0,0.0);
-	glDrawArrays(GL_TRIANGLES, 0, 3);	// хоёр дахь объектийг зурах
+		glBindVertexArray(vaoID[1]);		// хоёр дахь VAO
+		shaderManager["Simple"]->VertexAttrib3f("inColour",1.0,0.0,0.0);
+		glDrawArrays(GL_TRIANGLES, 0, 3);	// хоёр дахь объектийг зурах
+	}
+	shaderManager["Simple"]->Deactivate();
 }
 
-void Intro::InitializeGL() {
+void Intro::Initialize() {
 	shaderManager.CreateShaderProgram("Simple");
 
 	shaderManager.AttachShader("SimpleVertex"  , VERTEX);
@@ -107,8 +119,6 @@ void Intro::InitializeGL() {
 
 	shaderManager.LinkProgramObject("Simple");
 	shaderManager["Simple"]->Activate();
-
-	modelMat = glm::mat4(1);
 
 	// эхний объект
 	float* vert = new float[9];	// vertex array

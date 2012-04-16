@@ -63,7 +63,7 @@ void Demo02::Update() {
 	bool changeButton = APP.GetKey(GLFW_KEY_F1);
 	if (changeButton && !isEntered) {
 		Engine *engine = Engine::Instance();
-		engine->ChangesState("intro");
+		engine->ChangesState("demo01");
 	}
 
 	bool shouldMoveForward  = APP.GetKey('W');
@@ -128,8 +128,8 @@ void Demo02::Initialize() {
 
 	shaderManager.AttachShader("SimpleVertex"  , VERTEX);
 	shaderManager.AttachShader("SimpleFragment", FRAGMENT);
-	shaderManager.LoadShaderSource("SimpleVertex"  , "data/shaders/demo02/demo02.vert.glsl");
-	shaderManager.LoadShaderSource("SimpleFragment", "data/shaders/demo02/demo02.frag.glsl");
+	shaderManager.LoadShaderSource("SimpleVertex"  , "data/shaders/demo02/demo02.phong.vert.glsl");
+	shaderManager.LoadShaderSource("SimpleFragment", "data/shaders/demo02/demo02.phong.frag.glsl");
 
 	shaderManager.CompileShader("SimpleVertex");
 	shaderManager.CompileShader("SimpleFragment");

@@ -10,8 +10,8 @@
 
 Game::Game()
 {
-	isEntered = true;
-
+	isEntered   = true;
+	isFirstTime = true;
 	tank = new TestEntity(this);
 	entities.push_back(tank);
 }
@@ -41,6 +41,12 @@ void Game::Resume()
 	glfwSetWindowTitle(str);
 
 	APP.SetCursorVisible(true);
+
+	if(isFirstTime)
+	{
+		Initialize();
+		isFirstTime = false;
+	}
 }
 
 void Game::Update()
@@ -84,4 +90,8 @@ void Game::Render()
 		IEntity* entity = entities[i];
 		entity->Render();
 	}
+}
+
+void Game::Initialize()
+{
 }

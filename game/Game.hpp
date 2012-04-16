@@ -25,9 +25,11 @@ public:
 	void Update();
 	void Render();
 
+	void Initialize();
 protected:
 private:
 	bool isEntered;
+	bool isFirstTime;
 	float enteredTime;
 
 	std::vector<IEntity*> entities;
