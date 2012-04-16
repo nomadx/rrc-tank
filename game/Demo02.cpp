@@ -8,6 +8,7 @@
 #include "Demo02.hpp"
 #include "../graphics/ObjModel.hpp"
 #include <memory>
+#include "../graphics/Shader.hpp"
 
 Demo02::Demo02()
 {
@@ -81,25 +82,41 @@ void Demo02::Update() {
 
 	camera.Update();
 
-	modelMatrix      = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f));
+	modelMatrix      = glm::rotate(glm::scale(glm::mat4(1.0f), glm::vec3(2.0f)), 90.0f, glm::vec3(0,0,1));
 	viewMatrix       = camera.GetViewMat();
 	projectionMatrix = camera.GetProjMat();
+
+	normalMatrix = glm::inverse(glm::transpose(glm::mat3(viewMatrix*modelMatrix)));
 }
 void Demo02::Render() {
 	glViewport(0, 0, (int)camera.GetWidth(),(int)camera.GetHeight());
 	glClearColor(0.0f, 0.5f, 1.0f, 0.0f);
 	glClearDepth(1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	shaderManager["Simple"]->Activate();
 	{
 		shaderManager["Simple"]->SetUniformMatrix4fv("modelMatrix"     , 1, GL_FALSE, &modelMatrix     [0][0]);
 		shaderManager["Simple"]->SetUniformMatrix4fv("viewMatrix"      , 1, GL_FALSE, &viewMatrix      [0][0]);
 		shaderManager["Simple"]->SetUniformMatrix4fv("projectionMatrix", 1, GL_FALSE, &projectionMatrix[0][0]);
+		shaderManager["Simple"]->SetUniformMatrix3fv("normalMatrix"    , 1, GL_FALSE, &normalMatrix    [0][0]);
+
+		// гэрлийн мэдээллүүдийг илгээж байна
+		shaderManager["Simple"]->SetUniform3fv("uLight.direction"    , 1, light.direction);
+		shaderManager["Simple"]->SetUniform4fv("uLight.ambientColor" , 1, light.ambientColor);
+		shaderManager["Simple"]->SetUniform4fv("uLight.diffuseColor" , 1, light.diffuseColor);
+		shaderManager["Simple"]->SetUniform4fv("uLight.specularColor", 1, light.specularColor);
+		// материалын мэдээллүүдийг илгээж байна
+		shaderManager["Simple"]->SetUniform4fv("uMaterial.ambientColor" , 1, material.ambientColor);
+		shaderManager["Simple"]->SetUniform4fv("uMaterial.diffuseColor" , 1, material.diffuseColor);
+		shaderManager["Simple"]->SetUniform4fv("uMaterial.specularColor", 1, material.specularColor);
+		shaderManager["Simple"]->SetUniform1f ("uMaterial.specularExponent", material.specularExponent);
 
 		glBindVertexArray(vaoID[0]);
+		{
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboID[0]);
 			glDrawElements(GL_TRIANGLES, triangleCount * 3, GL_UNSIGNED_INT, 0);
+		}
 		glBindVertexArray(0);
 	}
 	shaderManager["Simple"]->Deactivate();
@@ -110,8 +127,8 @@ void Demo02::Initialize() {
 
 	shaderManager.AttachShader("SimpleVertex"  , VERTEX);
 	shaderManager.AttachShader("SimpleFragment", FRAGMENT);
-	shaderManager.LoadShaderSource("SimpleVertex"  , "data/shaders/demo02/texture.vert.glsl");
-	shaderManager.LoadShaderSource("SimpleFragment", "data/shaders/demo02/grey.frag.glsl");
+	shaderManager.LoadShaderSource("SimpleVertex"  , "data/shaders/demo02/demo02.vert.glsl");
+	shaderManager.LoadShaderSource("SimpleFragment", "data/shaders/demo02/demo02.frag.glsl");
 
 	shaderManager.CompileShader("SimpleVertex");
 	shaderManager.CompileShader("SimpleFragment");
@@ -156,6 +173,21 @@ void Demo02::Initialize() {
 	shaderManager["Simple"]->EnableAttribArray("inNormal");
 	glBindVertexArray(0);
 
+	// Цагаан гэрэл
+	light = {{1.0f, 1.0f, 1.0f },         // гэрлийн чиглэл
+			 {0.3f, 0.3f, 0.3f, 1.0f },   // ambient өнгө
+			 {1.0f, 1.0f, 1.0f, 1.0f },   // diffuse өнгө
+			 {1.0f, 1.0f, 1.0f, 1.0f } }; // specular өнгө
+	// цагаан specular өнгө бүхий хөх өнгөтэй материал
+	material = {{ 0.0f, 0.0f, 1.0f, 1.0f }, // ambient өнгө
+				{ 0.0f, 0.0f, 1.0f, 1.0f }, // diffuse өнгө
+				{ 1.0f, 1.0f, 1.0f, 1.0f }, // specular өнгө
+				20.0f };                    // specular exponent
+
+
+    glClearDepth(1.0f);
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
 
 }
 

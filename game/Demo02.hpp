@@ -17,6 +17,22 @@
 #include "../graphics/ShaderManager.hpp"
 #include "../graphics/Camera.hpp"
 
+struct LightProperties
+{
+    GLfloat direction[3];
+    GLfloat ambientColor[4];
+    GLfloat diffuseColor[4];
+    GLfloat specularColor[4];
+};
+struct MaterialProperties
+{
+    GLfloat ambientColor[4];
+    GLfloat diffuseColor[4];
+    GLfloat specularColor[4];
+    GLfloat specularExponent;
+};
+
+
 class Demo02: public AbstractState {
 public:
 	Demo02();
@@ -42,12 +58,16 @@ private:
 	glm::mat4 modelMatrix;
 	glm::mat4 viewMatrix;
 	glm::mat4 projectionMatrix;
+	glm::mat3 normalMatrix;
 
 	GLuint vaoID[2]; // Vertex Array Object {vertex, normal}
 	GLuint vboID[3]; // Vertex Buffer Object {element, positions, normals}
 	GLuint textureID; // texture
 
 	GLsizei triangleCount;
+
+    struct LightProperties    light;
+    struct MaterialProperties material;
 };
 
 #endif /* DEMO02_HPP_ */
