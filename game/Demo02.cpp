@@ -82,8 +82,8 @@ void Demo02::Update() {
 
 	camera.Update();
 
-	//modelMatrix      = glm::rotate(glm::scale(glm::mat4(1.0f), glm::vec3(2.0f)), 90.0f, glm::vec3(0,0,1));
-	modelMatrix      = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f));
+	modelMatrix      = glm::rotate(glm::scale(glm::mat4(1.0f), glm::vec3(2.0f)), 90.0f, glm::vec3(0,0,1));
+	//modelMatrix      = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f));
 	viewMatrix       = camera.GetViewMat();
 	projectionMatrix = camera.GetProjMat();
 
@@ -144,7 +144,7 @@ void Demo02::Initialize() {
 
 	//----------------------------
 	std::auto_ptr<ObjModel> model(new ObjModel);
-	model->Load("data/model/obj/suzanne.obj");
+	model->Load("data/model/obj/bunny.obj");
 			triangleCount = model->faces.size();
 	GLsizei vertexCount   = model->vertices.size();
 
@@ -183,7 +183,7 @@ void Demo02::Initialize() {
 	material = {{ 0.0f, 0.0f, 1.0f, 1.0f }, // ambient өнгө
 				{ 0.0f, 0.0f, 1.0f, 1.0f }, // diffuse өнгө
 				{ 1.0f, 1.0f, 1.0f, 1.0f }, // specular өнгө
-				20.0f };                    // specular exponent
+				1.0f };                    // specular exponent
 
 
     glClearDepth(1.0f);
