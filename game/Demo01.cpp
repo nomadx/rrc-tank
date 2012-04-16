@@ -13,7 +13,7 @@
 
 Demo01::Demo01() {
 	isEntered = true;
-	Initialize();
+	isFirstTime = true;
 	APP.SetCursorVisible(false);
 }
 
@@ -42,6 +42,12 @@ void Demo01::Resume() {
 	glfwSetWindowTitle(str);
 
 	APP.SetCursorVisible(false);
+
+	if(isFirstTime)
+	{
+		isFirstTime = false;
+		Initialize();
+	}
 }
 
 void Demo01::Update() {
@@ -56,7 +62,7 @@ void Demo01::Update() {
 	bool changeButton = APP.GetKey(GLFW_KEY_F1);
 	if (changeButton && !isEntered) {
 		Engine *engine = Engine::Instance();
-		engine->ChangesState("game");
+		engine->ChangesState("demo02");
 	}
 
 	bool shouldMoveForward  = APP.GetKey('W');

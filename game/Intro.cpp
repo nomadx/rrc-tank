@@ -52,7 +52,7 @@ void Intro::Update() {
 	bool changeButton = APP.GetKey(GLFW_KEY_F1);
 	if (changeButton && !isEntered) {
 		Engine *engine = Engine::Instance();
-		engine->ChangesState("game");
+		engine->ChangesState("demo02");
 	}
 
 	bool shouldMoveForward  = APP.GetKey('W');

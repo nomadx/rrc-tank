@@ -33,6 +33,7 @@ public:
 protected:
 private:
 	bool isEntered;
+	bool isFirstTime;
 	float enteredTime;
 
 	Camera camera;

@@ -11,8 +11,8 @@
 
 Demo02::Demo02()
 {
-	isEntered = true;
-	Initialize();
+	isEntered   = true;
+	isFirstTime = true;
 	APP.SetCursorVisible(false);
 }
 Demo02::~Demo02()
@@ -42,6 +42,12 @@ void Demo02::Resume() {
 	glfwSetWindowTitle(str);
 
 	APP.SetCursorVisible(false);
+
+	if(isFirstTime)
+	{
+		Initialize();
+		isFirstTime = false;
+	}
 }
 
 void Demo02::Update() {
@@ -56,7 +62,7 @@ void Demo02::Update() {
 	bool changeButton = APP.GetKey(GLFW_KEY_F1);
 	if (changeButton && !isEntered) {
 		Engine *engine = Engine::Instance();
-		engine->ChangesState("game");
+		engine->ChangesState("intro");
 	}
 
 	bool shouldMoveForward  = APP.GetKey('W');
@@ -91,16 +97,12 @@ void Demo02::Render() {
 		shaderManager["Simple"]->SetUniformMatrix4fv("viewMatrix"      , 1, GL_FALSE, &viewMatrix      [0][0]);
 		shaderManager["Simple"]->SetUniformMatrix4fv("projectionMatrix", 1, GL_FALSE, &projectionMatrix[0][0]);
 
-		/*glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, textureID);
-		shaderManager["Simple"]->SetUniform1i("uTexture", 0);*/
-
 		glBindVertexArray(vaoID[0]);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboID[0]);
 			glDrawElements(GL_TRIANGLES, triangleCount * 3, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 	}
-	shaderManager["Simple"]->Deactivate(); // shader програмаа хэрэглэж болсон бол идэвхигүй болгох
+	shaderManager["Simple"]->Deactivate();
 }
 
 void Demo02::Initialize() {

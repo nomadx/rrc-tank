@@ -14,7 +14,7 @@
 
 Demo00::Demo00() {
 	isEntered = true;
-	Initialize();
+	isFirstTime = true;
 	APP.SetCursorVisible(false);
 }
 
@@ -39,6 +39,10 @@ void Demo00::Resume() {
 	glfwSetWindowTitle(str);
 
 	APP.SetCursorVisible(false);
+	if (isFirstTime){
+		Initialize();
+		isFirstTime = false;
+	}
 }
 
 void Demo00::Update() {

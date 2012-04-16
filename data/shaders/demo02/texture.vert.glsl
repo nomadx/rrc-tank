@@ -5,7 +5,7 @@ uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
 
 in vec3 inPosition;
-in vec2 inNormal;
+in vec3 inNormal;
 
 void main(void)
 {
