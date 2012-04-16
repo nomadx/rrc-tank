@@ -83,7 +83,7 @@ void Demo02::Update() {
 	camera.Update();
 
 	modelMatrix      = glm::rotate(glm::scale(glm::mat4(1.0f), glm::vec3(2.0f)), 90.0f, glm::vec3(0,0,1));
-	//modelMatrix      = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f));
+	//modelMatrix      = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f));
 	viewMatrix       = camera.GetViewMat();
 	projectionMatrix = camera.GetProjMat();
 
