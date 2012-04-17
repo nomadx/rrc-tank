@@ -25,11 +25,12 @@ public:
 	void Update();
 	void Render();
 
-	void InitializeGL();
+	void Initialize();
 
 protected:
 private:
 	bool isEntered;
+	bool isFirstTime;
 	float enteredTime;
 
 	Camera camera;

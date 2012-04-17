@@ -1,17 +1,15 @@
 
-![image](http://dl.dropbox.com/u/3482121/picture/RRC/RRC-framework/camera-control.png "image")
-![image](http://dl.dropbox.com/u/3482121/picture/RRC/RRC-framework/running-on-windows.png "image")
-
-Энгийн 2D танк бичих замаар 
 OpenGL бичихэд хэрэглэх фрэймворк үүсгэх зорилготой
 
 Энэ Demo нь заавал бүрэн тоглоом болох албагүй
 
+Програм эхлүүлээд F1 товч дараарай.
+
 Ашиглагдсан сангууд
- - GLFW
- - GLEW
- - OpenGL
- - GLM
+- GLFW
+- GLEW
+- OpenGL
+- GLM
 
 Хийгдэх зүйлс
 
@@ -26,3 +24,6 @@ OpenGL бичихэд хэрэглэх фрэймворк үүсгэх зори�
 - тоглоомын бага хэмжээний логик тооцооллыг тоглоом өрнөх
   state дээр хэрэгжүүлэх. Танк хөдлөж юм түүдэг байж болно
 
+
+![image](http://dl.dropbox.com/u/3482121/picture/RRC/RRC-framework/stanford-bunny4.png "image")
+![image](http://dl.dropbox.com/u/3482121/picture/RRC/RRC-framework/bunny-windows.png "image")

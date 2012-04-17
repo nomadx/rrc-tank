@@ -27,6 +27,9 @@ public:
 	glm::vec3 GetDir();
 	glm::vec3 GetUp();
 
+	float GetWidth();
+	float GetHeight();
+
 	void UpdateAngles(float hori, float vert);
 	void UpdateHorizontalAngle(float hori);
 	void UpdateVerticalAngle  (float vert);
