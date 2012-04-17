@@ -15,6 +15,7 @@
 #include "game/Demo01.hpp"
 #include "game/Demo02.hpp"
 #include "game/Demo03.hpp"
+#include "game/Demo04.hpp"
 
 int main(void)
 {
@@ -30,8 +31,9 @@ int main(void)
 	engine->AddGameState("demo01", new Demo01());
 	engine->AddGameState("demo02", new Demo02());
 	engine->AddGameState("demo03", new Demo03());
+	engine->AddGameState("demo04", new Demo04());
 
-	engine->ChangesState("demo03");
+	engine->ChangesState("demo04");
 
 	while(engine->KeepRunning())
 	{

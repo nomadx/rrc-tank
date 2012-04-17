@@ -125,11 +125,6 @@ void Demo03::Update() {
 	mvp = projectionMatrix * viewMatrix * modelMatrix;
 }
 void Demo03::Render() {
-
-	glClearColor(0.0f, 0.5f, 1.0f, 0.0f);
-	glClearDepth(1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	static GLint flip = 0; // buffer-үүдийн хооронд шилжихэд зориулагдсан buffer
 
 	static GLfloat time = 0;
