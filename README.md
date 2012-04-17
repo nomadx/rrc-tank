@@ -1,7 +1,4 @@
 
-![image](http://dl.dropbox.com/u/3482121/picture/RRC/RRC-framework/stanford-bunny4.png "image")
-![image](http://dl.dropbox.com/u/3482121/picture/RRC/RRC-framework/running-on-windows.png "image")
-
 OpenGL бичихэд хэрэглэх фрэймворк үүсгэх зорилготой
 
 Энэ Demo нь заавал бүрэн тоглоом болох албагүй
@@ -27,3 +24,6 @@ OpenGL бичихэд хэрэглэх фрэймворк үүсгэх зори�
 - тоглоомын бага хэмжээний логик тооцооллыг тоглоом өрнөх
   state дээр хэрэгжүүлэх. Танк хөдлөж юм түүдэг байж болно
 
+
+![image](http://dl.dropbox.com/u/3482121/picture/RRC/RRC-framework/stanford-bunny4.png "image")
+![image](http://dl.dropbox.com/u/3482121/picture/RRC/RRC-framework/bunny-windows.png "image")
