@@ -14,6 +14,7 @@
 #include "game/Demo00.hpp"
 #include "game/Demo01.hpp"
 #include "game/Demo02.hpp"
+#include "game/Demo03.hpp"
 
 int main(void)
 {
@@ -23,13 +24,14 @@ int main(void)
 
 	Engine *engine = Engine::Instance();
 
-	engine->AddGameState("intro", new Intro());
-	engine->AddGameState("game" , new Game());
+	engine->AddGameState("intro" , new Intro());
+	engine->AddGameState("game"  , new Game());
 	engine->AddGameState("demo00", new Demo00());
 	engine->AddGameState("demo01", new Demo01());
 	engine->AddGameState("demo02", new Demo02());
+	engine->AddGameState("demo03", new Demo03());
 
-	engine->ChangesState("intro");
+	engine->ChangesState("demo03");
 
 	while(engine->KeepRunning())
 	{

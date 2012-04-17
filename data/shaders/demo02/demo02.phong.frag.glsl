@@ -27,7 +27,7 @@ layout(location = 0, index = 0) out vec4 fragColor;
 
 void main(void)
 {
-    // Note: All calculations are in camera space.
+    // All calculations are in camera space.
     vec4 color = uLight.ambientColor * uMaterial.ambientColor;
     vec3 normal = normalize(vNormal);
     float nDotL = max(dot(uLight.direction, normal), 0.0);        

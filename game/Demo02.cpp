@@ -8,7 +8,6 @@
 #include "Demo02.hpp"
 #include "../graphics/ObjModel.hpp"
 #include <memory>
-#include "../graphics/Shader.hpp"
 
 Demo02::Demo02()
 {
