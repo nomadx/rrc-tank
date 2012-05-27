@@ -16,12 +16,13 @@
 #include "game/Demo02.hpp"
 #include "game/Demo03.hpp"
 #include "game/Demo04.hpp"
+#include "game/TankDemo.hpp"
 
 int main(void)
 {
 	int x = 5;
 	ASSERT(x==5);
-	ASSERT(x!=5);
+	//ASSERT(x!=5);
 
 	Engine *engine = Engine::Instance();
 
@@ -32,8 +33,9 @@ int main(void)
 	engine->AddGameState("demo02", new Demo02());
 	engine->AddGameState("demo03", new Demo03());
 	engine->AddGameState("demo04", new Demo04());
+	engine->AddGameState("tankDemo", new TankDemo());
 
-	engine->ChangesState("demo04");
+	engine->ChangesState("tankDemo");
 
 	while(engine->KeepRunning())
 	{

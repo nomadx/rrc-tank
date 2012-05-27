@@ -1,4 +1,4 @@
-#version 150
+#version 330
 
 uniform mat3 u_normalMatrix;
 
